@@ -31,7 +31,7 @@ const data = await getSpreadSheet();
       <div className='container flex flex-wrap justify-center mt-5'>
       {data?.map((value, index) => (
           <div className='m-3' key={index}>
-             <SpeakerCard namn={value[0]} efternamn={value[1]} titel={value[2]} />
+             <SpeakerCard namn={value[0]} efternamn={value[1]} titel={value[2]} bildId={value[3]}/>
           </div>
         ))}
       </div>
