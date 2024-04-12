@@ -3,7 +3,7 @@ import Navbar from './components/Navbar'
 import { google } from 'googleapis'
 import SpeakerCard from './components/SpeakerCard';
 
-async function getSpreadSheet() {
+async function getSpeakersSpreadSheet() {
   const auth = await google.auth.getClient({ scopes: ['https://www.googleapis.com/auth/spreadsheets'] });
   const sheets = google.sheets({ version: 'v4', auth });
   try {
@@ -12,16 +12,15 @@ async function getSpreadSheet() {
           range: 'Sheet1'
       });
       const data = res.data.values
-      return data;
+      const dataWithoutFirstRow = data?.splice(1)
+      return dataWithoutFirstRow;
   } catch (error) {
       console.error('Cannot fetch from google sheets:', error);
   }
 }
 
 export default async function Home() {
-
-const data = await getSpreadSheet();
-
+const data = await getSpeakersSpreadSheet();
   return (
     <div>
       <Navbar/>
