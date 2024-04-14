@@ -1,34 +1,36 @@
 import Image from 'next/image'
 import Navbar from './components/Navbar'
 import { google } from 'googleapis'
+import { getGeneralInformation, getSpeakers, getOrganizers, getSchedule, getFaQ } from './google-sheets-api/getContent'
 import SpeakerCard from './components/SpeakerCard';
 
-async function getSpeakersSpreadSheet() {
-  const auth = await google.auth.getClient({ scopes: ['https://www.googleapis.com/auth/spreadsheets'] });
-  const sheets = google.sheets({ version: 'v4', auth });
-  try {
-      const res = await sheets.spreadsheets.values.get({
-          spreadsheetId: process.env.SHEET_ID,
-          range: 'Sheet1'
-      });
-      const data = res.data.values
-      const dataWithoutFirstRow = data?.splice(1)
-      return dataWithoutFirstRow;
-  } catch (error) {
-      console.error('Cannot fetch from google sheets:', error);
-  }
+interface GeneralInfo {
+  datum: string;
+  om: string;
+  tema: string;
+  omTema: string;
+  bibelord: string;
+  fbLänk: string;
 }
 
 export default async function Home() {
-const data = await getSpeakersSpreadSheet();
+  const general: GeneralInfo = await getGeneralInformation()
+  const speakers = await getSpeakers();
+  const organizers = await getOrganizers();
+  const faq = await getFaQ()
+  const schedule = await getSchedule()
+  console.log(schedule)
   return (
     <div>
       <Navbar/>
     <div className='container flex justify-center mt-5'>
-    <h1 className='font-bold text-xl text-lime-700'>Talare från Google Kalkylark</h1>
+    <h1 className='font-bold text-xl text-lime-700'>Info från Google Kalkylark</h1>
+    </div>
+    <div className='container flex justify-center mt-5'>
+      hello
     </div>
       <div className='container flex flex-wrap justify-center mt-5'>
-      {data?.map((value, index) => (
+      {speakers?.map((value, index) => (
           <div className='m-3' key={index}>
              <SpeakerCard namn={value[0]} efternamn={value[1]} titel={value[2]} bildId={value[3]}/>
           </div>
