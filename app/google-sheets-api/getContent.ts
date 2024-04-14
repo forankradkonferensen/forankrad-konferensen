@@ -7,8 +7,9 @@ type GeneralInformation = {
     tema: string;
     omTema: string;
     bibelord: string;
-    fbLänk: string;
-} | Error;
+    bibelRef: string;
+    pris: string;
+};
 
 export async function getGeneralInformation(): Promise<GeneralInformation> {
     const auth = await google.auth.getClient({ scopes: ['https://www.googleapis.com/auth/spreadsheets'] });
@@ -19,34 +20,17 @@ export async function getGeneralInformation(): Promise<GeneralInformation> {
             range: 'Sheet1'
         });
         const data = res.data.values
-        if(!data) return new Error('add data in google spread sheet')
-        const [datum, om, tema, omTema, bibelord, fbLänk] = data[1]
+        if(!data) console.log('no data in google spread sheets')
+        const [datum, om, tema, omTema, bibelord, bibelRef, pris] = data[1]
         return {
             datum,
             om,
             tema,
             omTema,
             bibelord,
-            fbLänk,
+            bibelRef,
+            pris,
         }
-    } catch (error) {
-        console.error('Cannot fetch from google sheets:', error);
-        return new Error('Cannot fetch data from Google Sheets');
-    }
-  }
-
-// getOrganizers
-export async function getOrganizers() {
-    const auth = await google.auth.getClient({ scopes: ['https://www.googleapis.com/auth/spreadsheets'] });
-    const sheets = google.sheets({ version: 'v4', auth });
-    try {
-        const res = await sheets.spreadsheets.values.get({
-            spreadsheetId: process.env.CONTRIBUTORS_ID,
-            range: 'arrangörer'
-        });
-        const data = res.data.values
-        const dataWithoutFirstRow = data?.splice(1)
-        return dataWithoutFirstRow;
     } catch (error) {
         console.error('Cannot fetch from google sheets:', error);
     }
@@ -69,8 +53,24 @@ export async function getSpeakers() {
     }
   }
 
-// getSchedule
+// getTestimonials
+export async function getTestimonials() {
+    const auth = await google.auth.getClient({ scopes: ['https://www.googleapis.com/auth/spreadsheets'] });
+    const sheets = google.sheets({ version: 'v4', auth });
+    try {
+        const res = await sheets.spreadsheets.values.get({
+            spreadsheetId: process.env.CONTRIBUTORS_ID,
+            range: 'testimonials'
+        });
+        const data = res.data.values
+        const dataWithoutFirstRow = data?.splice(1)
+        return dataWithoutFirstRow;
+    } catch (error) {
+        console.error('Cannot fetch from google sheets:', error);
+    }
+  }
 
+// getSchedule
 type Schedule = {
     [key: string]: Array<Array<string>>;
   };
