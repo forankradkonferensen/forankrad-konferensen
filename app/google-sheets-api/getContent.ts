@@ -1,7 +1,16 @@
 import { google } from 'googleapis'
 
 // getGeneralInformation
-export async function getGeneralInformation() {
+type GeneralInformation = {
+    datum: string;
+    om: string;
+    tema: string;
+    omTema: string;
+    bibelord: string;
+    fbLänk: string;
+} | Error;
+
+export async function getGeneralInformation(): Promise<GeneralInformation> {
     const auth = await google.auth.getClient({ scopes: ['https://www.googleapis.com/auth/spreadsheets'] });
     const sheets = google.sheets({ version: 'v4', auth });
     try {
@@ -22,6 +31,7 @@ export async function getGeneralInformation() {
         }
     } catch (error) {
         console.error('Cannot fetch from google sheets:', error);
+        return new Error('Cannot fetch data from Google Sheets');
     }
   }
 
