@@ -1,6 +1,5 @@
 import Image from 'next/image'
 import Navbar from './components/Navbar'
-import { google } from 'googleapis'
 import { getGeneralInformation, getSpeakers, getTestimonials, getSchedule, getFaQ } from './google-sheets-api/getContent'
 import SpeakerCard from './components/SpeakerCard';
 
@@ -11,7 +10,6 @@ export default async function Home() {
   const testimonials = await getTestimonials();
   const faq = await getFaQ()
   const schedule = await getSchedule()
-  console.log(schedule)
   return (
     <div>
       <Navbar/>

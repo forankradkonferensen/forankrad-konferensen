@@ -1,11 +1,13 @@
 import { GoogleApis, google } from 'googleapis'
 
+const privateKey = process.env.private_key!.replace(/@/g, '\n');
+
 // credentials for the google service account
 const serviceAccount = {
     "type": "service_account",
     "project_id": "fresh-generator-420014",
     "private_key_id": process.env.private_key_id,
-    "private_key": process.env.private_key,
+    "private_key": privateKey,
     "client_email": process.env.client_email,
     "client_id": process.env.client_id,
     "auth_uri": "https://accounts.google.com/o/oauth2/auth",
