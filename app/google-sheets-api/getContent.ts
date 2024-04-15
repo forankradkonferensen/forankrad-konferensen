@@ -1,6 +1,8 @@
 import { GoogleApis, google } from 'googleapis'
 
-const privateKey = process.env.private_key!.replace(/@/g, '\n');
+const privateKey_one = process.env.private_key_part_one!.replace(/@/g, '\n');
+const privateKey_two = process.env.private_key_part_two!.replace(/@/g, '\n');
+const privateKey = privateKey_one + privateKey_two
 
 // credentials for the google service account
 const serviceAccount = {
