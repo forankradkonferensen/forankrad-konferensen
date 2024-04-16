@@ -1,5 +1,6 @@
 import { GoogleApis, google } from 'googleapis'
 
+// The private key is stored with placeholder @ and then replaced with the escape character \n bacause of deployment issuees
 const privateKey = process.env.private_key!.replace(/@/g, '\n');
 
 // credentials for the google service account

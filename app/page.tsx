@@ -3,7 +3,10 @@ import Navbar from './components/Navbar'
 import { getGeneralInformation, getSpeakers, getTestimonials, getSchedule, getFaQ } from './google-sheets-api/getContent'
 import SpeakerCard from './components/SpeakerCard';
 
+export const revalidate = 0
+
 export default async function Home() {
+  
   const general = await getGeneralInformation()
   const {datum, om, tema, omTema, bibelord, bibelRef, pris} = general
   const speakers = await getSpeakers();
