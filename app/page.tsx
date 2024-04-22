@@ -2,11 +2,11 @@ import Image from 'next/image'
 import Navbar from './components/Navbar'
 import { getGeneralInformation, getSpeakers, getTestimonials, getSchedule, getFaQ } from './google-sheets-api/getContent'
 import SpeakerCard from './components/SpeakerCard';
+import Faq from './components/Faq';
 
 export const revalidate = 0
 
 export default async function Home() {
-  
   const general = await getGeneralInformation()
   const {datum, om, tema, omTema, bibelord, bibelRef, pris} = general
   const speakers = await getSpeakers();
@@ -66,11 +66,10 @@ export default async function Home() {
       <div className='container flex justify-center mt-5 text-lime-800'>
         <h1>Frågor och svar</h1>
       </div>
-      <div className='flex justify-center'>
+      <div className='container'>
         {faq?.map((value, index) => (
-          <div key={index}>
-            <span> Question: {value[0]} </span>
-            <span> Answer: {value[1]} </span>
+      <div className='mx-auto w-full max-w-md' key={index}>
+            <Faq question={value[0]} answer={value[1]}/>
           </div>
         ))}
       </div>
