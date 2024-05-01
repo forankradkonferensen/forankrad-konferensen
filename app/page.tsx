@@ -28,7 +28,7 @@ export default async function Home() {
       <Banner text={bibelord} bibleRef={bibelRef} />
       <div className='bg-lightBlue'> {/* Kommentarer */}
         <div>
-          <h4 className='text-black text-xl text-center'>"Jag ser fram emot...</h4>
+          <h4 className='text-black text-xl text-center'>&ldquo;Jag ser fram emot...&rdquo;</h4>
           <p className='text-black text-center'>- Emanuel</p>
         </div>
         <div>
