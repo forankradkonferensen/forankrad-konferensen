@@ -5,7 +5,7 @@ import './globals.css'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'Förankrad Konererensen',
+  title: 'Förankrad Konferensen',
   description: 'För unga vuxna som vill bli mer förankrade i sin tro på Jesus',
 }
 
