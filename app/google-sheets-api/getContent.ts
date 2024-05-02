@@ -63,20 +63,6 @@ export async function getGeneralInformation(): Promise<GeneralInformation> {
         throw error; // Re-throw the error to handle it in the calling code
     }
 }
-// getSpeakers return a 2d array with the structure of [namn, efternamn, titel, bildId]
-export async function getSpeakers(): Promise<string[][] | undefined> {
-    try {
-        const res = await sheets.spreadsheets.values.get({
-            spreadsheetId: process.env.CONTRIBUTORS_ID,
-            range: 'talare',
-        });
-        const data: string[][] | undefined | null = res.data.values;
-        const dataWithoutFirstRow = data?.splice(1);
-        return dataWithoutFirstRow;
-    } catch (error) {
-        console.error('Cannot fetch from google sheets:', error);
-    }
-}
 // getTestimonials return a 2d array with the structure [namn, testimonial, bildId]
 export async function getTestimonials(): Promise<string[][] | undefined> {
     try {
@@ -98,10 +84,8 @@ export async function getSchedule(): Promise<string[][] | undefined> {
             spreadsheetId: process.env.SCHEDULE_ID,
             range: 'Sheet1',
         });
-        if (res.data.values) {
-            const dataWithoutFirstRow = res.data.values.splice(1);
+            const dataWithoutFirstRow = res.data?.values?.splice(1);
             return dataWithoutFirstRow;
-        }
     } catch (error) {
         console.error('Cannot fetch from google sheets:', error);
     }
@@ -120,31 +104,19 @@ export async function getFaQ(): Promise<string[][] | undefined> {
         console.error('Cannot fetch from google sheets:', error);
     }
 }
-
-export async function getWorkshops(): Promise<string[][] | undefined> {
+// getWorkshopsAndSeminars().workshops or .seminars return 2d array of  [seminar/workshop, leader/speaker]
+export async function getWorkshopsAndSeminars(): Promise<{ workshops: string[][] | undefined, seminars: string[][] | undefined }> {
     try {
-        const res = await sheets.spreadsheets.values.get({
+        const res = await sheets.spreadsheets.values.batchGet({
             spreadsheetId: process.env.ACTIVITIES,
-            range: 'workshops',
+            ranges: ['workshops', 'seminarier'],
         });
-        const data: string[][] | undefined | null = res.data.values;
-        const dataWithoutFirstRow: string[][] | undefined | null = data?.splice(1);
-        return dataWithoutFirstRow;
-    } catch (error) {
-        console.error('Cannot fetch from google sheets:', error);
-    }
-}
+        const workshopsData: string[][] | undefined = res.data.valueRanges?.[0].values?.splice(1);
+        const seminarsData: string[][] | undefined = res.data.valueRanges?.[1].values?.splice(1);
 
-export async function getSeminars(): Promise<string[][] | undefined> {
-    try {
-        const res = await sheets.spreadsheets.values.get({
-            spreadsheetId: process.env.ACTIVITIES,
-            range: 'seminarier',
-        });
-        const data: string[][] | undefined | null = res.data.values;
-        const dataWithoutFirstRow: string[][] | undefined | null = data?.splice(1);
-        return dataWithoutFirstRow;
+        return { workshops: workshopsData, seminars: seminarsData };
     } catch (error) {
-        console.error('Cannot fetch from google sheets:', error);
+        console.error('Cannot fetch from Google Sheets:', error);
+        return { workshops: undefined, seminars: undefined };
     }
 }

@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import Navbar from './components/Navbar'
 import Banner from "./components/Banner"
-import { getGeneralInformation, getSpeakers, getTestimonials, getSchedule, getFaQ, getWorkshops, getSeminars } from './google-sheets-api/getContent'
+import { getGeneralInformation, getTestimonials, getSchedule, getFaQ, getWorkshopsAndSeminars } from './google-sheets-api/getContent'
 import SpeakerCard from './components/SpeakerCard';
 import Faq from './components/Faq';
 
@@ -10,12 +10,10 @@ export const revalidate = 0
 export default async function Home() {
   const general = await getGeneralInformation()
   const { datum, om, tema, omTema, bibelord, bibelRef, pris, plats } = general
-  const speakers = await getSpeakers();
   const testimonials = await getTestimonials();
   const faq = await getFaQ()
   const schedule = await getSchedule()
-  const workshops = await getWorkshops()
-  const seminars = await getSeminars()
+  const workshopsAndSeminars = await getWorkshopsAndSeminars();
 
   return (
     <div>
@@ -60,13 +58,13 @@ export default async function Home() {
       <div className='bg-black px-40 py-24 w-full'> {/* Seminarier & Workshops */}
         <div className='pb-10'>
           <h1 className='text-3xl text-center pb-10'>Seminarier</h1>
-          {seminars?.map((seminar, index) => ( 
+          {workshopsAndSeminars.seminars?.map((seminar, index) => ( 
             <p key={index} className='font-extralight p-1'>{seminar[0]} - {seminar[1]}</p>
           ))}
         </div>
         <div>
           <h1 className='text-3xl text-center pb-10'>Workshops</h1>
-          {workshops?.map((seminar, index) => ( 
+          {workshopsAndSeminars.workshops?.map((seminar, index) => ( 
             <p key={index} className='font-extralight p-1'>{seminar[0]} - {seminar[1]}</p>
           ))}
         </div>
@@ -84,59 +82,6 @@ export default async function Home() {
       <div className='bg-black px-40 py-24 w-full flex flex-col'> {/* Kontakta oss Mail */}
         <h1 className='text-3xl text-center pb-5'>Kontakta oss</h1>
         <a className='text-xl flex justify-center underline decoration-1 underline-offset-4' href="forankradkonferensen@gmail.com">forankradkonferensen@gmail.com</a>
-      </div>
-
-      {/* ------------------------------------------------------------------------------------- */}
-
-      <div className='container flex justify-center mt-5'>
-        <h1 className='font-bold text-xl text-lime-700'>Info från Google Kalkylark</h1>
-      </div>
-      <div className='container flex justify-center mt-5 text-lime-800'>
-        <h1>General Info</h1>
-      </div>
-      <div className='container flex justify-center mt-5'>
-
-        <ul>
-          <li>datum: {datum}</li>
-          <li>Om: {om}</li>
-          <li>tema: {tema}</li>
-          <li>om temat: {omTema}</li>
-          <li>bibelord: {bibelord}</li>
-          <li>bibelRef: {bibelRef}</li>
-          <li>pris: {pris}</li>
-        </ul>
-      </div>
-      <div className='container flex flex-wrap justify-center mt-5'>
-        {speakers?.map((value, index) => (
-          <div className='m-3' key={index}>
-            <SpeakerCard namn={value[0]} efternamn={value[1]} titel={value[2]} bildId={value[3]} />
-          </div>
-        ))}
-      </div>
-      <div className='container flex flex-wrap justify-center mt-5'>
-        {testimonials?.map((value, index) => (
-          <div className='m-3' key={index}>
-            <div>
-              <h1>{value[0]}</h1>
-              <p>{value[1]}</p>
-              <Image src={`https://drive.google.com/uc?id=${value[2]}`} alt={`bild på ${value[0]}`} width={100} height={100} />
-            </div>
-          </div>
-        ))}
-      </div>
-      <div className='container flex justify-center mt-5 text-lime-800'>
-        <h1>Schema</h1>
-      </div>
-
-      <div className='container flex justify-center mt-5 text-lime-800'>
-        <h1>Frågor och svar</h1>
-      </div>
-      <div className='container'>
-        {faq?.map((value, index) => (
-          <div className='mx-auto w-full max-w-md' key={index}>
-            <Faq question={value[0]} answer={value[1]} />
-          </div>
-        ))}
       </div>
     </div>
   )
