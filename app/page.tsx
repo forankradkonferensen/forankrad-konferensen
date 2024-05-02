@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import Navbar from './components/Navbar'
 import Banner from "./components/Banner"
-import { getGeneralInformation, getSpeakers, getTestimonials, getSchedule, getFaQ } from './google-sheets-api/getContent'
+import { getGeneralInformation, getSpeakers, getTestimonials, getSchedule, getFaQ, getWorkshops, getSeminars } from './google-sheets-api/getContent'
 import SpeakerCard from './components/SpeakerCard';
 import Faq from './components/Faq';
 
@@ -14,6 +14,9 @@ export default async function Home() {
   const testimonials = await getTestimonials();
   const faq = await getFaQ()
   const schedule = await getSchedule()
+  const workshops = await getWorkshops()
+  const seminars = await getSeminars()
+
   return (
     <div>
       <Navbar />
@@ -57,21 +60,15 @@ export default async function Home() {
       <div className='bg-black px-40 py-24 w-full'> {/* Seminarier & Workshops */}
         <div className='pb-10'>
           <h1 className='text-3xl text-center pb-10'>Seminarier</h1>
-          <p className='font-extralight p-1'>Mission 2024 - Tatta Lennartsson</p>
-          <p className='font-extralight p-1'>Vad spelar Bibeln för roll? - Joel MacInnes</p>
-          <p className='font-extralight p-1'>Gud som konstnär - </p>
-          <p className='font-extralight p-1'>Sport for Life - </p>
-          <p className='font-extralight p-1'>Seminarie 5</p>
-          <p className='font-extralight p-1'>Seminarie 6</p>
+          {seminars?.map((seminar, index) => ( 
+            <p key={index} className='font-extralight p-1'>{seminar[0]} - {seminar[1]}</p>
+          ))}
         </div>
         <div>
           <h1 className='text-3xl text-center pb-10'>Workshops</h1>
-          <p className='font-extralight p-1'>Mission 2024 - Tatta Lennartsson</p>
-          <p className='font-extralight p-1'>Vad spelar Bibeln för roll? - Joel MacInnes</p>
-          <p className='font-extralight p-1'>Gud som konstnär - </p>
-          <p className='font-extralight p-1'>Sport for Life - </p>
-          <p className='font-extralight p-1'>Seminarie 5</p>
-          <p className='font-extralight p-1'>Seminarie 6</p>
+          {workshops?.map((seminar, index) => ( 
+            <p key={index} className='font-extralight p-1'>{seminar[0]} - {seminar[1]}</p>
+          ))}
         </div>
       </div>
       <div className='bg-black px-40 py-24 w-full'> {/* Vanliga frågor/FAQ */}

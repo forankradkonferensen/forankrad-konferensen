@@ -120,3 +120,31 @@ export async function getFaQ(): Promise<string[][] | undefined> {
         console.error('Cannot fetch from google sheets:', error);
     }
 }
+
+export async function getWorkshops(): Promise<string[][] | undefined> {
+    try {
+        const res = await sheets.spreadsheets.values.get({
+            spreadsheetId: process.env.ACTIVITIES,
+            range: 'workshops',
+        });
+        const data: string[][] | undefined | null = res.data.values;
+        const dataWithoutFirstRow: string[][] | undefined | null = data?.splice(1);
+        return dataWithoutFirstRow;
+    } catch (error) {
+        console.error('Cannot fetch from google sheets:', error);
+    }
+}
+
+export async function getSeminars(): Promise<string[][] | undefined> {
+    try {
+        const res = await sheets.spreadsheets.values.get({
+            spreadsheetId: process.env.ACTIVITIES,
+            range: 'seminarier',
+        });
+        const data: string[][] | undefined | null = res.data.values;
+        const dataWithoutFirstRow: string[][] | undefined | null = data?.splice(1);
+        return dataWithoutFirstRow;
+    } catch (error) {
+        console.error('Cannot fetch from google sheets:', error);
+    }
+}
