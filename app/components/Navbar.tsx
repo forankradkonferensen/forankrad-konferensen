@@ -14,8 +14,8 @@ const Navbar = () => {
                 <a className="btn btn-ghost text-xl">Förankrad Konferensen</a>
             </div>
             <div className="navbar-end">
-                <p className='mr-5'><a>Hem</a></p>
-                <p className='mr-5'><a>Anmälan</a></p>
+                <p className='mr-5'><a href='/'>Hem</a></p>
+                <p className='mr-5'><a href='boka'>Anmälan</a></p>
             </div>
         </div>
     )
