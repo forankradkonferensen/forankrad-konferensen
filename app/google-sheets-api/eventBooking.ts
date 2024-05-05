@@ -53,27 +53,33 @@ export async function bookEvent(bookingData: string[]) {
     }
 }
 
-function sendEmailConfirmation() {
-    var transporter = nodemailer.createTransport({
-        service: 'gmail',
-        auth: {
-          user: 'forankradkonferensen@gmail.com',
-          pass: 'forankrad777'
-        }
-      });
-      
-      var mailOptions = {
-        from: 'forankradkonferensen@gmail.com',
-        to: 'emanuel.gustafzon@gmail.com',
-        subject: 'Sending Email using Node.js',
-        text: 'That was easy!'
-      };
-      
-      transporter.sendMail(mailOptions, function(error, info){
-        if (error) {
-          console.log(error);
-        } else {
-          console.log('Email sent: ' + info.response);
-        }
-      });
+export async function cancelBooking(email: string) {
+    try {
+        const sheetId = '10QGIaldA2awCKz2yNl4KXbP1leP_WzTR1qDiIsWUnCg';
+        const range = 'Sheet1';
+
+        // Fetch existing data from the sheet
+        const response = await sheets.spreadsheets.values.get({
+            spreadsheetId: sheetId,
+            range: range,
+        });
+
+        const rows = response.data.values || [];
+
+        // Filter out the row with the specified email
+        const newData = rows.filter(row => !row.includes(email));
+
+        // Update the entire sheet with the filtered data
+        await sheets.spreadsheets.values.update({
+            spreadsheetId: sheetId,
+            range: range,
+            valueInputOption: 'RAW',
+            requestBody: { values: newData },
+        });
+
+        console.log('Booking canceled successfully');
+    } catch (error) {
+        console.error('Failed to cancel booking:', error);
+    }
 }
+
