@@ -67,7 +67,8 @@ export async function cancelBooking(email: string) {
         const rows = response.data.values || [];
 
         // Filter out the row with the specified email
-        const newData = rows.filter(row => !row.includes(email));
+        //const newData = rows.filter(row => !row.includes(email));
+        const newData = rows.map(row => row.includes(email) ? [] : row)
 
         // Update the entire sheet with the filtered data
         await sheets.spreadsheets.values.update({
