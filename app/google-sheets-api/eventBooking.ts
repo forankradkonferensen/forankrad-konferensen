@@ -79,7 +79,7 @@ export async function cancelBooking(email: string) {
             {
                 deleteDimension: {
                     range: {
-                        sheetId: 'Sheet1',
+                        sheetId: sheetId,
                         dimension: 'ROWS',
                         startIndex: rowIndex,
                         endIndex: rowIndex + 1,
@@ -89,7 +89,7 @@ export async function cancelBooking(email: string) {
             {
                 deleteDimension: {
                     range: {
-                        sheetId: 'Sheet1',
+                        sheetId: sheetId,
                         dimension: 'COLUMNS',
                         startIndex: 0,
                         endIndex: 4, 
