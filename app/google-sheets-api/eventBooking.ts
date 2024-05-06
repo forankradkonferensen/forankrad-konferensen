@@ -67,15 +67,26 @@ export async function cancelBooking(email: string) {
         const rows = response.data.values || [];
 
         // Filter out the row with the specified email
-        //const newData = rows.filter(row => !row.includes(email));
-        const newData = rows.map(row => row.includes(email) ? [] : row)
+        const rowIndex = rows.findIndex(row => row.includes(email));
+        if(rowIndex === -1) return
 
         // Update the entire sheet with the filtered data
-        await sheets.spreadsheets.values.update({
+        await sheets.spreadsheets.values.batchUpdate({
             spreadsheetId: sheetId,
-            range: range,
-            valueInputOption: 'RAW',
-            requestBody: { values: newData },
+            requestBody: { 
+                requests: [
+                    {
+                        deleteDimension: {
+                            range: {
+                                sheetId: 0, // Assuming it's the first sheet
+                                dimension: 'ROWS',
+                                startIndex: rowIndex,
+                                endIndex: rowIndex + 1, // Delete one row
+                            },
+                        },
+                    },
+                ],
+            },
         });
 
         console.log('Booking canceled successfully');
