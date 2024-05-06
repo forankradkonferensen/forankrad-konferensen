@@ -41,7 +41,6 @@ export async function bookEvent(bookingData: string[]) {
 
           const newData = [...nonEmptyRows, bookingData];
 
-
           await sheets.spreadsheets.values.update({
             spreadsheetId: '10QGIaldA2awCKz2yNl4KXbP1leP_WzTR1qDiIsWUnCg',
             range: 'Sheet1',
@@ -66,45 +65,17 @@ export async function cancelBooking(email: string) {
 
         console.log('Response from Google Sheets API:', response);
 
-        const rows = response.data.values || [];
+        const rows: string[][] = response.data.values || [];
 
-        // Filter out the row with the specified email
-        const rowIndex = rows.findIndex(row => row.includes(email));
-        if(rowIndex === -1) {
-            console.log('Email not found in the booking list.');
-            return;
-        }
-
-        const requests = [
-            {
-                deleteDimension: {
-                    range: {
-                        sheetId: sheetId,
-                        dimension: 'ROWS',
-                        startIndex: rowIndex,
-                        endIndex: rowIndex + 1,
-                    },
-                },
-            },
-            {
-                deleteDimension: {
-                    range: {
-                        sheetId: sheetId,
-                        dimension: 'COLUMNS',
-                        startIndex: 0,
-                        endIndex: 4, 
-                    },
-                },
-            },
-        ];
-
-        await sheets.spreadsheets.batchUpdate({
-            spreadsheetId: sheetId,
-            requestBody: {
-                requests: requests,
-            },
-        });
+        const newData: string[][] = rows.filter((row: string[]) => !row.includes(email)) 
         
+        await sheets.spreadsheets.values.update({
+            spreadsheetId: '10QGIaldA2awCKz2yNl4KXbP1leP_WzTR1qDiIsWUnCg',
+            range: 'Sheet1',
+            valueInputOption: 'RAW',
+            requestBody: { values: newData },
+          });
+
         console.log('Booking canceled successfully');
     } catch (error) {
         console.error('Failed to cancel booking:', error);
