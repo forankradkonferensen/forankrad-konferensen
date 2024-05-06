@@ -64,11 +64,16 @@ export async function cancelBooking(email: string) {
             range: range,
         });
 
+        console.log('Response from Google Sheets API:', response);
+
         const rows = response.data.values || [];
 
         // Filter out the row with the specified email
         const rowIndex = rows.findIndex(row => row.includes(email));
-        if(rowIndex === -1) return
+        if(rowIndex === -1) {
+            console.log('Email not found in the booking list.');
+            return;
+        }
 
         // Update the entire sheet with the filtered data
         await sheets.spreadsheets.values.batchUpdate({
