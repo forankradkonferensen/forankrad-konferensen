@@ -28,7 +28,7 @@ const sheets = google.sheets({ version: 'v4', auth });
 export async function bookEvent(bookingData: string[]) {
     try {
         const response = await sheets.spreadsheets.values.get({
-            spreadsheetId: '10QGIaldA2awCKz2yNl4KXbP1leP_WzTR1qDiIsWUnCg',
+            spreadsheetId: process.env.BOOKINGS,
             range: 'Sheet1',
         });
         const rows = response.data.values || [];
@@ -36,49 +36,18 @@ export async function bookEvent(bookingData: string[]) {
         const nonEmptyRows = rows.filter(row => row.length > 0);
         if (nonEmptyRows.length >= 301) {
             console.log("Ledsen, det finns inga platser kvar");
-            return;
+            return new Error('Ledsen det är fullbokat');
           }
 
           const newData = [...nonEmptyRows, bookingData];
 
           await sheets.spreadsheets.values.update({
-            spreadsheetId: '10QGIaldA2awCKz2yNl4KXbP1leP_WzTR1qDiIsWUnCg',
+            spreadsheetId: process.env.BOOKINGS,
             range: 'Sheet1',
             valueInputOption: 'RAW',
             requestBody: { values: newData },
           });
     } catch (error) {
-        console.error('Cannot fetch from google sheets:', error);
+        console.error('Cannot fetch or update google sheets:', error);
     }
 }
-
-export async function cancelBooking(email: string) {
-    try {
-        const sheetId = '10QGIaldA2awCKz2yNl4KXbP1leP_WzTR1qDiIsWUnCg';
-        const range = 'Sheet1';
-
-        // Fetch existing data from the sheet
-        const response = await sheets.spreadsheets.values.get({
-            spreadsheetId: sheetId,
-            range: range,
-        });
-
-        console.log('Response from Google Sheets API:', response);
-
-        const rows: string[][] = response.data.values || [];
-
-        const newData: string[][] = rows.filter((row: string[]) => !row.includes(email)) 
-        
-        await sheets.spreadsheets.values.update({
-            spreadsheetId: '10QGIaldA2awCKz2yNl4KXbP1leP_WzTR1qDiIsWUnCg',
-            range: 'Sheet1',
-            valueInputOption: 'RAW',
-            requestBody: { values: newData },
-          });
-
-        console.log('Booking canceled successfully');
-    } catch (error) {
-        console.error('Failed to cancel booking:', error);
-    }
-}
-
