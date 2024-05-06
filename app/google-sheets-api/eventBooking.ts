@@ -75,7 +75,7 @@ export async function cancelBooking(email: string) {
             return;
         }
 
-        const rowRange = `${range}!A${rowIndex + 1}:${range}!Z${rowIndex + 1}`;
+        const rowRange = `${range}!A${rowIndex + 1}:${range}!D${rowIndex + 1}`;
 
         // Clear the contents of the row
         await sheets.spreadsheets.values.clear({
