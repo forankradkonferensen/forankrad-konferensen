@@ -75,12 +75,34 @@ export async function cancelBooking(email: string) {
             return;
         }
 
-        const rowRange = `${range}!A${rowIndex + 1}:${range}!D${rowIndex + 1}`;
+        const requests = [
+            {
+                deleteDimension: {
+                    range: {
+                        sheetId: 'Sheet1',
+                        dimension: 'ROWS',
+                        startIndex: rowIndex,
+                        endIndex: rowIndex + 1,
+                    },
+                },
+            },
+            {
+                deleteDimension: {
+                    range: {
+                        sheetId: 'Sheet1',
+                        dimension: 'COLUMNS',
+                        startIndex: 0,
+                        endIndex: 4, 
+                    },
+                },
+            },
+        ];
 
-        // Clear the contents of the row
-        await sheets.spreadsheets.values.clear({
+        await sheets.spreadsheets.batchUpdate({
             spreadsheetId: sheetId,
-            range: rowRange,
+            requestBody: {
+                requests: requests,
+            },
         });
         
         console.log('Booking canceled successfully');
