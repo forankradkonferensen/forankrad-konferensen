@@ -1,5 +1,16 @@
 'use client'
 import { ChangeEvent, useState } from "react";
+import { useFormStatus } from "react-dom";
+
+function SubmitButton() {
+    const { pending } = useFormStatus()
+   
+    return (
+      <button type="submit" disabled={pending}>
+        Add
+      </button>
+    )
+  }
 
 interface action {
     formAction: (name: string, lastname: string, email: string) => void
@@ -30,7 +41,7 @@ const BookingForm: React.FC<action> = ({formAction}) => {
         <label htmlFor="email">Email:</label><br />
         <input type="email" id="email" name="email" value={formData.email} onChange={handleChange} required /><br /><br />
         
-        <button type="submit">Submit</button>
+        <SubmitButton />
       </form>
     </div>
   )
