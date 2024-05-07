@@ -38,7 +38,7 @@ export async function bookEvent(bookingData: string[]) {
           }
         const emailAlreadyExist = rows.findIndex(row => row.includes(email));
         if(emailAlreadyExist !== -1) {
-           return new Error('alreadyBooked');
+           return new Error('dubbelbokning');
         }
           const newData = [...nonEmptyRows, bookingData];
           await sheets.spreadsheets.values.update({
