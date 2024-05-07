@@ -3,8 +3,11 @@ import { EmailTemplate } from "../components/EmailTemplate";
 import { bookEvent } from "../google-sheets-api/eventBooking";
 import { Resend } from 'resend';
 
-const handleBooking = async (name: string, lastname: string, email: string, ) => {
+const handleBooking = async (formData: FormData) => {
     'use server'
+    const name = formData.get("name")
+    const lastname = formData.get("lastName")
+    const email = formData.get("email")
     try {
         await bookEvent([name, lastname, email, 'nej']);
         await sendEmailBookingConfirmation(email, name); 
