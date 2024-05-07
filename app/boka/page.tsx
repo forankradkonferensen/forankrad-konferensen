@@ -3,17 +3,18 @@ import { EmailTemplate } from "../components/EmailTemplate";
 import { bookEvent } from "../google-sheets-api/eventBooking";
 import { Resend } from 'resend';
 
-const handleBooking = async (formData: FormData) => {
+const handleBooking = async (prevState: any, formData: FormData) => {
     'use server'
-    const name = formData.get("name")
-    const lastname = formData.get("lastName")
-    const email = formData.get("email")
+    const name = formData.get("name")?.toString()?? "";
+    const lastname = formData.get("lastName")?.toString() ?? "";
+    const email = formData.get("email")?.toString() ?? "";
+    console.log(name,lastname,email)
     try {
         await bookEvent([name, lastname, email, 'nej']);
         await sendEmailBookingConfirmation(email, name); 
     } catch (error) {
         console.error('Failed to book event:', error);
-        return new Error('Det gick inte att boka eventet, testa igen om en liten stund');
+        return {message: 'Det gick inte att boka eventet, testa igen om en liten stund'};
     }
 }
 
@@ -29,7 +30,7 @@ const sendEmailBookingConfirmation = async (email: string, name: string) => {
         })
     } catch (err) {
         console.log(err)
-        return new Error('Det gick inte att skicka mailet till din epost, testa igen');
+        return {message: 'Det gick inte att skicka mailet till din epost, testa igen'};
     }
 }
 
@@ -37,7 +38,7 @@ const Boka = () => {
     return (
         <div>
             <h1>Anmäl</h1>
-            <BookingForm formAction={handleBooking}/>
+            <BookingForm bookEvent={handleBooking}/>
         </div>
     );
 }
