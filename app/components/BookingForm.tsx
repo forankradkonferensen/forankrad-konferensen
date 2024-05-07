@@ -32,6 +32,9 @@ const BookingForm: React.FC<action> = ({bookEvent}) => {
         
         <label htmlFor="email">Email:</label><br />
         <input type="email" id="email" name="email" required /><br /><br />
+
+        <label htmlFor="emailConfirmation">Bekräfta Email:</label><br />
+        <input type="email" id="emailConfirmation" name="emailConfirmation" required /><br /><br />
         
         <SubmitButton />
       </form>
