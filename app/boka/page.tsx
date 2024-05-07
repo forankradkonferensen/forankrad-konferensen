@@ -8,7 +8,15 @@ const handleBooking = async (prevState: any, formData: FormData) => {
     const name = formData.get("name")?.toString()?? "";
     const lastname = formData.get("lastName")?.toString() ?? "";
     const email = formData.get("email")?.toString() ?? "";
-    console.log(name,lastname,email)
+    const confirmEmail = formData.get("confirmEmail")?.toString() ?? "";
+
+    if (!email || !confirmEmail) {
+        return { message: 'Vänligen fyll i båda email fälten' };
+    }
+
+    if (email !== confirmEmail) {
+        return { message: 'Email fälten matchar inte' };
+    }
     try {
         await bookEvent([name, lastname, email, 'nej']);
         await sendEmailBookingConfirmation(email, name); 
