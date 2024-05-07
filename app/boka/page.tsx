@@ -1,7 +1,6 @@
 import BookingForm from "../components/BookingForm";
 import { EmailTemplate } from "../components/EmailTemplate";
 import { bookEvent } from "../google-sheets-api/eventBooking";
-import { revalidatePath } from 'next/cache'
 import { Resend } from 'resend';
 
 const handleBooking = async (prevState: any, formData: FormData) => {
@@ -13,12 +12,11 @@ const handleBooking = async (prevState: any, formData: FormData) => {
 
     if (email !== confirmEmail) {
         return { message: 'Email fälten matchar inte' };
-        revalidatePath('/boka')
     }
     try {
         await bookEvent([name, lastname, email, 'nej']);
         await sendEmailBookingConfirmation(email, name); 
-        revalidatePath('/boka')
+        return {message: 'Tack, kolla din email'}
     } catch (error) {
         console.error('Failed to book event:', error);
         return {message: 'Det gick inte att boka eventet, testa igen om en liten stund'};
