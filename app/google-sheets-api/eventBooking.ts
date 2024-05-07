@@ -36,6 +36,7 @@ export async function bookEvent(bookingData: string[]) {
             console.log("Ledsen, det finns inga platser kvar");
             return new Error('fullbokat');
           }
+        const email: string = bookingData[2]
         const emailAlreadyExist = rows.findIndex(row => row.includes(email));
         if(emailAlreadyExist !== -1) {
            return new Error('dubbelbokning');
