@@ -21,9 +21,11 @@ const handleBooking = async (prevState: any, formData: FormData) => {
                 return { message: 'Ledsen det finns inga platser kvar' };
             }
         }
-        if(sendEmail instanceof Error) return { message: 'Vi kunde inte skicka ett email till dig men kontakta oss så löser vi det' };
+        if(sendEmail instanceof Error) {
+            return { message: 'Vi kunde inte skicka ett email till dig, kontakta oss så hjälper vi dig!' };        
+        } 
 
-        return {message: 'Tack, kolla din email för att slutföra bokningen'}
+        return {message: 'Tack, kolla din email för att slutföra bokningen!'}
     } catch (error) {
         console.error('Failed to book event:', error);
             return { message: 'Det gick inte att boka eventet, testa igen om en liten stund' };
@@ -40,9 +42,12 @@ const sendEmailBookingConfirmation = async (email: string, name: string) => {
             subject: 'Slutför bokning',
             react: EmailTemplate({ firstName: name, price: '250'}) as React.ReactElement,
         })
+        if(data.error) {
+            return new Error()
+        }
     } catch (err) {
         console.log(err)
-        return {message: 'Det gick inte att skicka mailet till din epost, testa igen'};
+        return new Error();
     }
 }
 
