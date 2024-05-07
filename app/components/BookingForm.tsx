@@ -1,6 +1,6 @@
 'use client'
 import { ChangeEvent, useState } from "react";
-import { useFormState, useFormStatus } from "react-dom";
+import { useFormStatus, useFormState  } from "react-dom";
 
 function SubmitButton() {
     const { pending } = useFormStatus()
@@ -13,20 +13,15 @@ function SubmitButton() {
   }
 
 interface action {
-    bookEventHandeler: (formData: FormData) => Promise<any>
+    bookEvent: (prevState: any, formData: FormData) => Promise<{ message: string; } | undefined>
 }
-const initialState = {
-    message: '',
-  }
-const BookingForm: React.FC<action> = ({bookEventHandeler}) => {
-    const [state, formAction] = useFormState(bookEventHandeler, initialState)
+const BookingForm: React.FC<action> = ({bookEvent}) => {
+    const [state, formAction] = useFormState(bookEvent, {message: ""})
+    
   return (
     <div>
       <form action={formAction}>
-        <p aria-live="polite" className="sr-only">
-            {state?.message}
-        </p>
-
+         
         <label htmlFor="name">First Name:</label><br />
         <input type="text" id="name" name="name" required /><br />
         
@@ -35,8 +30,14 @@ const BookingForm: React.FC<action> = ({bookEventHandeler}) => {
         
         <label htmlFor="email">Email:</label><br />
         <input type="email" id="email" name="email" required /><br /><br />
+
+        <label htmlFor="emailConfirmation">Bekräfta Email:</label><br />
+        <input type="email" id="emailConfirmation" name="emailConfirmation" required /><br /><br />
         
         <SubmitButton />
+          <p>
+             {state?.message}
+          </p>
       </form>
     </div>
   )
