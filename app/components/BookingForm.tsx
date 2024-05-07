@@ -1,6 +1,6 @@
 'use client'
 import { ChangeEvent, useState } from "react";
-import { useFormStatus } from "react-dom";
+import { useFormState, useFormStatus } from "react-dom";
 
 function SubmitButton() {
     const { pending } = useFormStatus()
@@ -13,33 +13,28 @@ function SubmitButton() {
   }
 
 interface action {
-    formAction: (name: string, lastname: string, email: string) => void
+    bookEventHandeler: (formData: FormData) => Promise<any>
 }
-const BookingForm: React.FC<action> = ({formAction}) => {
-    const [formData, setFormData] = useState({
-        name: '',
-        lastName: '',
-        email: ''
-      });
-
-      const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-        const { name, value } = e.target;
-        setFormData({
-          ...formData,
-          [name]: value
-        });
-      };
+const initialState = {
+    message: '',
+  }
+const BookingForm: React.FC<action> = ({bookEventHandeler}) => {
+    const [state, formAction] = useFormState(bookEventHandeler, initialState)
   return (
     <div>
-      <form action={ ()=> formAction(formData.name, formData.lastName, formData.email)}>
+      <form action={formAction}>
+        <p aria-live="polite" className="sr-only">
+            {state?.message}
+        </p>
+
         <label htmlFor="name">First Name:</label><br />
-        <input type="text" id="name" name="name" value={formData.name} onChange={handleChange} required /><br />
+        <input type="text" id="name" name="name" required /><br />
         
         <label htmlFor="lastName">Last Name:</label><br />
-        <input type="text" id="lastName" name="lastName" value={formData.lastName} onChange={handleChange} required /><br />
+        <input type="text" id="lastName" name="lastName" required /><br />
         
         <label htmlFor="email">Email:</label><br />
-        <input type="email" id="email" name="email" value={formData.email} onChange={handleChange} required /><br /><br />
+        <input type="email" id="email" name="email" required /><br /><br />
         
         <SubmitButton />
       </form>
