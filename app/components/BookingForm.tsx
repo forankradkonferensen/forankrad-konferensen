@@ -13,33 +13,21 @@ function SubmitButton() {
   }
 
 interface action {
-    formAction: (name: string, lastname: string, email: string) => void
+    formAction: (formData: FormData) => Promise<any>
 }
 const BookingForm: React.FC<action> = ({formAction}) => {
-    const [formData, setFormData] = useState({
-        name: '',
-        lastName: '',
-        email: ''
-      });
-
-      const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-        const { name, value } = e.target;
-        setFormData({
-          ...formData,
-          [name]: value
-        });
-      };
+    
   return (
     <div>
-      <form action={ ()=> formAction(formData.name, formData.lastName, formData.email)}>
+      <form action={formAction}>
         <label htmlFor="name">First Name:</label><br />
-        <input type="text" id="name" name="name" value={formData.name} onChange={handleChange} required /><br />
+        <input type="text" id="name" name="name" required /><br />
         
         <label htmlFor="lastName">Last Name:</label><br />
-        <input type="text" id="lastName" name="lastName" value={formData.lastName} onChange={handleChange} required /><br />
+        <input type="text" id="lastName" name="lastName" required /><br />
         
         <label htmlFor="email">Email:</label><br />
-        <input type="email" id="email" name="email" value={formData.email} onChange={handleChange} required /><br /><br />
+        <input type="email" id="email" name="email" required /><br /><br />
         
         <SubmitButton />
       </form>
