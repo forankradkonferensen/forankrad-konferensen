@@ -40,6 +40,7 @@ const sendEmailBookingConfirmation = async (email: string, name: string) => {
             subject: 'Slutför bokning',
             react: EmailTemplate({ firstName: name, price: '250'}) as React.ReactElement,
         })
+        if(data instanceof Error) return {message: 'det gick inte skicka ett mail till dig'}
     } catch (err) {
         console.log(err)
         return {message: 'Det gick inte att skicka mailet till din epost, testa igen'};
