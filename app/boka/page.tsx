@@ -19,6 +19,9 @@ const handleBooking = async (prevState: any, formData: FormData) => {
         if(book instanceof Error) {
             if(book.message === 'fullbokat') {
                 return { message: 'Ledsen det finns inga platser kvar' };
+            } 
+            if(book.message === 'dubbelbokning') {
+                return { message: 'Du har redan bokat! Har du inte fått bekräftelse via mail så kontakta oss.' };
             }
         }
         if(sendEmail instanceof Error) {
