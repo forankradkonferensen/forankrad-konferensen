@@ -1,5 +1,4 @@
 'use client'
-import { ChangeEvent, useState } from "react";
 import { useFormStatus, useFormState  } from "react-dom";
 
 function SubmitButton() {
@@ -7,7 +6,7 @@ function SubmitButton() {
    
     return (
       <button type="submit" disabled={pending}>
-        Add
+        {pending ? "Ett ögonblick..." : "Boka"}
       </button>
     )
   }
@@ -33,11 +32,13 @@ const BookingForm: React.FC<action> = ({bookEvent}) => {
 
         <label htmlFor="emailConfirmation">Bekräfta Email:</label><br />
         <input type="email" id="emailConfirmation" name="emailConfirmation" required /><br /><br />
+
+          <p>
+            {state?.message}
+          </p>
         
         <SubmitButton />
-          <p>
-             {state?.message}
-          </p>
+
       </form>
     </div>
   )

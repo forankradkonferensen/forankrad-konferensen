@@ -14,12 +14,19 @@ const handleBooking = async (prevState: any, formData: FormData) => {
         return { message: 'Email fälten matchar inte' };
     }
     try {
-        await bookEvent([name, lastname, email, 'nej']);
-        await sendEmailBookingConfirmation(email, name); 
-        return {message: 'Tack, kolla din email'}
+        const book = await bookEvent([name, lastname, email, 'nej']);
+        const sendEmail = await sendEmailBookingConfirmation(email, name); 
+        if(book instanceof Error) {
+            if(book.message === 'fullbokat') {
+                return { message: 'Ledsen det finns inga platser kvar' };
+            }
+        }
+        if(sendEmail instanceof Error) return { message: 'Vi kunde inte skicka ett email till dig men kontakta oss så löser vi det' };
+
+        return {message: 'Tack, kolla din email för att slutföra bokningen'}
     } catch (error) {
         console.error('Failed to book event:', error);
-        return {message: 'Det gick inte att boka eventet, testa igen om en liten stund'};
+            return { message: 'Det gick inte att boka eventet, testa igen om en liten stund' };
     }
 }
 
