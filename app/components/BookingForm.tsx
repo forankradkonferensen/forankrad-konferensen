@@ -21,9 +21,7 @@ const BookingForm: React.FC<action> = ({bookEvent}) => {
   return (
     <div>
       <form action={formAction}>
-         <p aria-live="polite" className="sr-only">
-        {state?.message}
-      </p>
+         
         <label htmlFor="name">First Name:</label><br />
         <input type="text" id="name" name="name" required /><br />
         
@@ -37,6 +35,12 @@ const BookingForm: React.FC<action> = ({bookEvent}) => {
         <input type="email" id="emailConfirmation" name="emailConfirmation" required /><br /><br />
         
         <SubmitButton />
+
+        {state.message ? (
+          <p aria-live="polite" className="sr-only">
+             {state?.message}
+          </p>
+         ) : null }
       </form>
     </div>
   )
