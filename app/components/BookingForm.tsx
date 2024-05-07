@@ -35,12 +35,9 @@ const BookingForm: React.FC<action> = ({bookEvent}) => {
         <input type="email" id="emailConfirmation" name="emailConfirmation" required /><br /><br />
         
         <SubmitButton />
-
-        {state?.message ? (
-          <p aria-live="polite" className="sr-only">
+          <p>
              {state?.message}
           </p>
-         ) : null }
       </form>
     </div>
   )
