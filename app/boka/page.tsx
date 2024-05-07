@@ -21,7 +21,7 @@ const handleBooking = async (prevState: any, formData: FormData) => {
     try {
         await bookEvent([name, lastname, email, 'nej']);
         await sendEmailBookingConfirmation(email, name); 
-        revalidatePath('/book')
+        revalidatePath('/boka')
     } catch (error) {
         console.error('Failed to book event:', error);
         return {message: 'Det gick inte att boka eventet, testa igen om en liten stund'};
