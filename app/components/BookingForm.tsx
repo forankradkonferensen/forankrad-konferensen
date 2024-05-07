@@ -1,6 +1,6 @@
 'use client'
 import { ChangeEvent, useState } from "react";
-import { useFormStatus } from "react-dom";
+import { useFormStatus, useFormState  } from "react-dom";
 
 function SubmitButton() {
     const { pending } = useFormStatus()
@@ -13,13 +13,17 @@ function SubmitButton() {
   }
 
 interface action {
-    formAction: (formData: FormData) => Promise<any>
+    bookEvent: (prevState: any, formData: FormData) => Promise<{ message: string; } | undefined>
 }
-const BookingForm: React.FC<action> = ({formAction}) => {
+const BookingForm: React.FC<action> = ({bookEvent}) => {
+    const [state, formAction] = useFormState(bookEvent, {message: ""})
     
   return (
     <div>
       <form action={formAction}>
+         <p aria-live="polite" className="sr-only">
+        {state?.message}
+      </p>
         <label htmlFor="name">First Name:</label><br />
         <input type="text" id="name" name="name" required /><br />
         
