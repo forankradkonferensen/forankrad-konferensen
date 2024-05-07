@@ -21,7 +21,6 @@ const handleBooking = async (prevState: any, formData: FormData) => {
                 return { message: 'Ledsen det finns inga platser kvar' };
             }
         }
-        if(sendEmail instanceof Error) return { message: 'Vi kunde inte skicka ett email till dig men kontakta oss så löser vi det' };
 
         return {message: 'Tack, kolla din email för att slutföra bokningen'}
     } catch (error) {
