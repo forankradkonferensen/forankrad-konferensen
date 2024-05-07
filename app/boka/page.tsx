@@ -8,7 +8,7 @@ const handleBooking = async (prevState: any, formData: FormData) => {
     const name = formData.get("name")?.toString()?? "";
     const lastname = formData.get("lastName")?.toString() ?? "";
     const email = formData.get("email")?.toString() ?? "";
-    const confirmEmail = formData.get("confirmEmail")?.toString() ?? "";
+    const confirmEmail = formData.get("emailConfirmation")?.toString() ?? "";
 
     if (!email || !confirmEmail) {
         return { message: 'Vänligen fyll i båda email fälten' };
