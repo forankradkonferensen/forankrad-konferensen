@@ -36,7 +36,7 @@ const BookingForm: React.FC<action> = ({bookEvent}) => {
         
         <SubmitButton />
 
-        {state.message ? (
+        {state?.message ? (
           <p aria-live="polite" className="sr-only">
              {state?.message}
           </p>
