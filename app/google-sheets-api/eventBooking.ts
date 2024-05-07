@@ -36,6 +36,10 @@ export async function bookEvent(bookingData: string[]) {
             console.log("Ledsen, det finns inga platser kvar");
             return new Error('fullbokat');
           }
+        const emailAlreadyExist = rows.findIndex(row => row.includes(email));
+        if(emailAlreadyExist !== -1) {
+           return new Error('alreadyBooked');
+        }
           const newData = [...nonEmptyRows, bookingData];
           await sheets.spreadsheets.values.update({
             spreadsheetId: process.env.BOOKINGS,
