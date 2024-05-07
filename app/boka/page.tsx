@@ -11,12 +11,9 @@ const handleBooking = async (prevState: any, formData: FormData) => {
     const email = formData.get("email")?.toString() ?? "";
     const confirmEmail = formData.get("emailConfirmation")?.toString() ?? "";
 
-    if (!email || !confirmEmail) {
-        return { message: 'Vänligen fyll i båda email fälten' };
-    }
-
     if (email !== confirmEmail) {
         return { message: 'Email fälten matchar inte' };
+        revalidatePath('/boka')
     }
     try {
         await bookEvent([name, lastname, email, 'nej']);
