@@ -40,7 +40,7 @@ const sendEmailBookingConfirmation = async (email: string, name: string) => {
     const resend = new Resend(process.env.RESENDKEY);
     try {
         const data = await resend.emails.send({
-            from: 'Acme <onboarding@resend.dev>',
+            from: 'Acme <noreply@forankradkonferensen.se>',
             to: [email],
             subject: 'Slutför bokning',
             react: EmailTemplate({ firstName: name, price: '250'}) as React.ReactElement,
