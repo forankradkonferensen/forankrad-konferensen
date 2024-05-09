@@ -50,6 +50,6 @@ export async function bookEvent(bookingData: string[]) {
           });
     } catch (error) {
         console.error('Cannot fetch or update google sheets:', error);
-        return new Error('Ursäkta! Vi har lite problem, försök om en liten stund');
+        return new Error('server');
     }
 }
