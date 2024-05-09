@@ -19,6 +19,9 @@ const handleBooking = async (prevState: any, formData: FormData) => {
          if(book.message === 'fullbokat') {
                 return { message: 'Ledsen det finns inga platser lediga just nu' };
             }
+         if(book.message === 'server') {
+                return {message: 'Det gick inte att boka just nu, testa igen om en liten stund'}
+            }
         }
         const sendEmail = await sendEmailBookingConfirmation(email, name); 
         if(sendEmail instanceof Error) {
