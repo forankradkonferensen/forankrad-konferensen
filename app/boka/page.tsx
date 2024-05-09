@@ -15,19 +15,20 @@ const handleBooking = async (prevState: any, formData: FormData) => {
     }
     try {
         const book = await bookEvent([name, lastname, email, 'nej']);
-        const sendEmail = await sendEmailBookingConfirmation(email, name); 
         if(book instanceof Error) {
-            if(book.message === 'fullbokat') {
+         if(book.message === 'fullbokat') {
                 return { message: 'Ledsen det finns inga platser lediga just nu' };
-            } 
-            if(book.message === 'dubbelbokning') {
-                return { message: 'Du har redan påbörjat en bokning! Har du inte fått ett mail från oss så kontakta oss.' };
             }
         }
+        const sendEmail = await sendEmailBookingConfirmation(email, name); 
         if(sendEmail instanceof Error) {
             return { message: 'Vi kunde inte skicka ett email till dig, kontakta oss så hjälper vi dig!' };        
+        }
+        if(book instanceof Error) {
+            if(book.message === 'dubbelbokning') {
+                return { message: 'Du har redan påbörjat en bokning! Vi skickar ett nytt mail till dig så du kan sluföra bokningen..' };
+            }
         } 
-
         return {message: 'Tack, kolla din email för att slutföra bokningen!'}
     } catch (error) {
         console.error('Failed to book event:', error);
