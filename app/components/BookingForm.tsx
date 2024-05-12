@@ -33,6 +33,21 @@ const BookingForm: React.FC<action> = ({bookEvent}) => {
         <label htmlFor="emailConfirmation">Bekräfta Email:</label><br />
         <input type="email" id="emailConfirmation" name="emailConfirmation" required /><br /><br />
 
+        <label htmlFor="personalNumber">Personnummer:</label><br />
+        <input type="number" placeholder="199507120000" id="personalNumber" name="personalNumber" required /><br /><br />
+
+        <label htmlFor="phoneNumber">Telefonnummer:</label><br />
+        <input type="phone"  id="phoneNumber" name="phoneNumber" required /><br /><br />
+
+        <label htmlFor="denomination">Församling:</label><br />
+        <input type="text" id="denomination" name="denomination" /><br /><br />
+
+        <label htmlFor="message">Meddelande / något speciellt vi behöver veta (ex. allergier):</label><br />
+        <input type="text-area" id="message" name="message" /><br /><br />
+
+        <label htmlFor="approve">Jag godkänner att Pingstkyrkan Västra Frölunda behandlar mina personuppgifter. Det kommer också fotas under helgen i dokumentations- och marknadsföringssyfte. Vill du inte vara med på bild, mejla forankradkonferensen@gmail.com</label><br />
+        <input type="checkbox" id="approve" name="approve" required /><br /><br />
+
           <p>
             {state?.message}
           </p>

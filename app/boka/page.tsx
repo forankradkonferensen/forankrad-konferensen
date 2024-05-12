@@ -9,12 +9,24 @@ const handleBooking = async (prevState: any, formData: FormData) => {
     const lastname = formData.get("lastName")?.toString() ?? "";
     const email = formData.get("email")?.toString() ?? "";
     const confirmEmail = formData.get("emailConfirmation")?.toString() ?? "";
+    const personalNumber = formData.get("personalNumber")?.toString() ?? "";
+    const phoneNumber = formData.get("phoneNumber")?.toString() ?? "";
+    const denomination = formData.get("denomination")?.toString() ?? "";
+    const message = formData.get("message")?.toString() ?? "";
+    const approve = formData.get("approve")
+    const hasPaied = 'nej'
 
     if (email !== confirmEmail) {
         return { message: 'Email fälten matchar inte' };
     }
+    if(approve !== 'on') {
+        return { message: 'Du måste godkänna att vi behandlar dina personuppgifter' };
+        }
+    if(personalNumber.length !== 12) {
+        return { message: 'Personnummret borde vara i detta format: 199507120000' };
+    }
     try {
-        const book = await bookEvent([name, lastname, email, 'nej']);
+        const book = await bookEvent([name, lastname, personalNumber, email, phoneNumber, denomination, message, hasPaied]);
         if(book instanceof Error) {
          if(book.message === 'fullbokat') {
                 return { message: 'Ledsen det finns inga platser lediga just nu' };
@@ -25,7 +37,7 @@ const handleBooking = async (prevState: any, formData: FormData) => {
         }
         const sendEmail = await sendEmailBookingConfirmation(email, name); 
         if(sendEmail instanceof Error) {
-            return { message: 'Vi kunde inte skicka ett email till dig, kontakta oss så hjälper vi dig!' };        
+            return { message: 'Vi kunde inte skicka ett email till dig, Försök igen eller kontakta oss på forankradkonferensen@gmail.com' };        
         }
         if(book instanceof Error) {
             if(book.message === 'dubbelbokning') {

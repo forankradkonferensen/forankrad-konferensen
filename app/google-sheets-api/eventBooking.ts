@@ -32,13 +32,15 @@ export async function bookEvent(bookingData: string[]) {
         });
         const rows = response.data.values || [];
         const nonEmptyRows = rows.filter(row => row.length > 0);
-        if (nonEmptyRows.length >= 301) {
+
+        const maxPossibleBookings = 301
+        if (nonEmptyRows.length >= maxPossibleBookings) {
             console.log("Ledsen, det finns inga platser kvar");
             return new Error('fullbokat');
           }
-        const email: string = bookingData[2]
-        const emailAlreadyExist = rows.findIndex(row => row.includes(email));
-        if(emailAlreadyExist !== -1) {
+        const personalNumber: string = bookingData[2]
+        const personalNumberAlreadyExist = rows.findIndex(row => row.includes(personalNumber));
+        if(personalNumberAlreadyExist !== -1) {
            return new Error('dubbelbokning');
         }
           const newData = [...nonEmptyRows, bookingData];
