@@ -63,20 +63,6 @@ export async function getGeneralInformation(): Promise<GeneralInformation> {
         throw error; // Re-throw the error to handle it in the calling code
     }
 }
-// getTestimonials return a 2d array with the structure [namn, testimonial, bildId]
-export async function getTestimonials(): Promise<string[][] | undefined> {
-    try {
-        const res = await sheets.spreadsheets.values.get({
-            spreadsheetId: process.env.CONTRIBUTORS_ID,
-            range: 'testimonials',
-        });
-        const data: string[][] | undefined | null = res.data.values;
-        const dataWithoutFirstRow: string[][] | undefined | null = data?.splice(1);
-        return dataWithoutFirstRow;
-    } catch (error) {
-        console.error('Cannot fetch from google sheets:', error);
-    }
-}
 
 export async function getSpeakersAndTestimonials(): Promise<{ testimonials: string[][] | undefined, speakers: string[][] | undefined }> {
     try {
