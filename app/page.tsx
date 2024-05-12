@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import Navbar from './components/Navbar'
 import Banner from "./components/Banner"
-import { getGeneralInformation, getTestimonials, getSchedule, getFaQ, getWorkshopsAndSeminars } from './google-sheets-api/getContent'
+import { getGeneralInformation, getSpeakersAndTestimonials, getSchedule, getFaQ, getWorkshopsAndSeminars } from './google-sheets-api/getContent'
 import SpeakerCard from './components/SpeakerCard';
 import Faq from './components/Faq';
 
@@ -10,7 +10,8 @@ export const revalidate = 0
 export default async function Home() {
   const general = await getGeneralInformation()
   const { datum, om, tema, omTema, bibelord, bibelRef, pris, plats } = general
-  const testimonials = await getTestimonials();
+  const testimonials = (await getSpeakersAndTestimonials()).testimonials;
+  const speakers = (await getSpeakersAndTestimonials()).speakers;
   const faq = await getFaQ()
   const schedule = await getSchedule()
   const workshopsAndSeminars = await getWorkshopsAndSeminars();

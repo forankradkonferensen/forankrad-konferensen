@@ -4,7 +4,7 @@ import { EmailTemplate } from "./components/EmailTemplate";
 import { Resend } from 'resend';
 
 export const handleBooking = async (prevState: any, formData: FormData) => {
-    const name = formData.get("name")?.toString()?? "";
+    const name = formData.get("name")?.toString() ?? "";
     const lastname = formData.get("lastName")?.toString() ?? "";
     const email = formData.get("email")?.toString() ?? "";
     const confirmEmail = formData.get("emailConfirmation")?.toString() ?? "";
