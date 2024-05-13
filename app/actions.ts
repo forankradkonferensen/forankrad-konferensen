@@ -25,7 +25,7 @@ export const handleBooking = async (prevState: any, formData: FormData) => {
         return { message: 'Personnummret borde vara i detta format: 199507120000' };
     }
     if(phoneNumber.length !== 12 || phoneNumber[0] !== '+') {
-       rerurn {message: "telefonnummret måste vara i detta formatet +46xxxxxxxxx"}
+       return {message: 'telefonnummret måste vara i detta formatet +46xxxxxxxxx'}
     }
     try {
         const book = await bookEvent([name, lastname, personalNumber, email, phoneNumber, denomination, message, hasPaied]);
