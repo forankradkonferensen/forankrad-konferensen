@@ -57,7 +57,7 @@ export const sendEmailBookingConfirmation = async (email: string, name: string) 
             from: 'Förankrad Konferensen <noreply@forankradkonferensen.se>',
             to: [email],
             subject: 'Slutför bokning',
-            react: EmailTemplate({ firstName: name, price: '250'}) as React.ReactElement,
+            react: EmailTemplate({ firstName: name }) as React.ReactElement,
         })
         if(data.error) {
             return new Error()
