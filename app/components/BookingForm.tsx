@@ -37,7 +37,7 @@ const BookingForm: React.FC<action> = ({bookEvent}) => {
         <input type="number" placeholder="199507120000" id="personalNumber" name="personalNumber" required /><br /><br />
 
         <label htmlFor="phoneNumber">Telefonnummer:</label><br />
-        <input type="phone"  id="phoneNumber" name="phoneNumber" required /><br /><br />
+        <input type="phone" placeholder="+46xxxxxxxxx" id="phoneNumber" name="phoneNumber" required /><br /><br />
 
         <label htmlFor="denomination">Församling:</label><br />
         <input type="text" id="denomination" name="denomination" /><br /><br />
