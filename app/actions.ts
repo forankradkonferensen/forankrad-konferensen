@@ -8,7 +8,7 @@ export const handleBooking = async (prevState: any, formData: FormData) => {
     const lastname = formData.get("lastName")?.toString() ?? "";
     const email = formData.get("email")?.toString() ?? "";
     const confirmEmail = formData.get("emailConfirmation")?.toString() ?? "";
-    const personalNumber = formData.get("personalNumber")?.toString().trim().replace(\/D/g, "") ?? "";
+    const personalNumber = formData.get("personalNumber")?.toString().trim() ?? "";
     const phoneNumber = formData.get("phoneNumber")?.toString() ?? "";
     const denomination = formData.get("denomination")?.toString() ?? "";
     const message = formData.get("message")?.toString() ?? "";
