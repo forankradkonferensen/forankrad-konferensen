@@ -9,7 +9,7 @@ export const handleBooking = async (prevState: any, formData: FormData) => {
     const email = formData.get("email")?.toString() ?? "";
     const confirmEmail = formData.get("emailConfirmation")?.toString() ?? "";
     const personalNumber = formData.get("personalNumber")?.toString().trim() ?? "";
-    const phoneNumber = formData.get("phoneNumber")?.toString() ?? "";
+    const phoneNumber = formData.get("phoneNumber")?.toString().trim() ?? "";
     const denomination = formData.get("denomination")?.toString() ?? "";
     const message = formData.get("message")?.toString() ?? "";
     const approve = formData.get("approve")
@@ -23,6 +23,9 @@ export const handleBooking = async (prevState: any, formData: FormData) => {
         }
     if(personalNumber.length !== 12) {
         return { message: 'Personnummret borde vara i detta format: 199507120000' };
+    }
+    if(phoneNumber.length !== 12 || phoneNumber[0] !== '+') {
+       rerurn {message: "telefonnummret måste vara i detta formatet +46xxxxxxxxx"}
     }
     try {
         const book = await bookEvent([name, lastname, personalNumber, email, phoneNumber, denomination, message, hasPaied]);
