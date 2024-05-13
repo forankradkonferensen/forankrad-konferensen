@@ -10,7 +10,7 @@ export const EmailTemplate: React.FC<Readonly<EmailTemplateProps>> = () => (
     <br />
     <p>Vänligen swisha med hjälp av QR-koden här nedan.</p>
     <strong className='text-red-700'>Skriv [Förnamn + Efternamn] i meddelandet</strong>
-    <img src='https://drive.google.com/uc?id=https://drive.google.com/file/d/1aRiUTqpTTwDABVfmvcRY5ev-yHqhBEVG/view?usp=drivesdk' alt='123-588 11 07' width={200} height={300}/>
+    <img src='https://drive.google.com/uc?id=1aRiUTqpTTwDABVfmvcRY5ev-yHqhBEVG' alt='123-588 11 07' width={200} height={300}/>
     <p>O du, se till att dela anmälningslänken med dina kompisar.</p>
     <p>Tills vi ses, så vill vi bara skicka med dig det här bibelordet. Vad kommer du att tänka på när du läser det? </p>
     <span className='italic'>Liksom ni tog emot Kristus Jesus som Herren,så lev i honom</span>
