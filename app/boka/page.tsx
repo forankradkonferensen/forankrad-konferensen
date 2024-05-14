@@ -5,8 +5,8 @@ import { Resend } from 'resend';
 
 const handleBooking = async (prevState: any, formData: FormData) => {
     'use server'
-    const name = formData.get("name")?.toString()?? "";
-    const lastname = formData.get("lastName")?.toString() ?? "";
+    const name = formData.get("name")?.toString() ?? "";
+    const lastName = formData.get("lastName")?.toString() ?? "";
     const email = formData.get("email")?.toString() ?? "";
     const confirmEmail = formData.get("emailConfirmation")?.toString() ?? "";
 
@@ -14,28 +14,28 @@ const handleBooking = async (prevState: any, formData: FormData) => {
         return { message: 'Email fälten matchar inte' };
     }
     try {
-        const book = await bookEvent([name, lastname, email, 'nej']);
-        if(book instanceof Error) {
-         if(book.message === 'fullbokat') {
+        const book = await bookEvent([name, lastName, email, 'nej']);
+        if (book instanceof Error) {
+            if (book.message === 'fullbokat') {
                 return { message: 'Ledsen det finns inga platser lediga just nu' };
             }
-         if(book.message === 'server') {
-                return {message: 'Det gick inte att boka just nu, testa igen om en liten stund'}
+            if (book.message === 'server') {
+                return { message: 'Det gick inte att boka just nu, testa igen om en liten stund' }
             }
         }
-        const sendEmail = await sendEmailBookingConfirmation(email, name); 
-        if(sendEmail instanceof Error) {
-            return { message: 'Vi kunde inte skicka ett email till dig, kontakta oss så hjälper vi dig!' };        
+        const sendEmail = await sendEmailBookingConfirmation(email, name);
+        if (sendEmail instanceof Error) {
+            return { message: 'Vi kunde inte skicka ett email till dig, kontakta oss så hjälper vi dig!' };
         }
-        if(book instanceof Error) {
-            if(book.message === 'dubbelbokning') {
-                return { message: 'Du har redan påbörjat en bokning! Vi skickar ett nytt mail till dig så du kan sluföra bokningen..' };
+        if (book instanceof Error) {
+            if (book.message === 'dubbelbokning') {
+                return { message: 'Du har redan påbörjat en bokning! Vi skickar ett nytt mail till dig så du kan slutföra bokningen.' };
             }
-        } 
-        return {message: 'Tack, kolla din email för att slutföra bokningen!'}
+        }
+        return { message: 'Tack, kolla din email för att slutföra bokningen!' }
     } catch (error) {
         console.error('Failed to book event:', error);
-            return { message: 'Det gick inte att boka eventet, testa igen om en liten stund' };
+        return { message: 'Det gick inte att boka eventet, testa igen om en liten stund' };
     }
 }
 
@@ -47,9 +47,9 @@ const sendEmailBookingConfirmation = async (email: string, name: string) => {
             from: 'Förankrad Konferensen <noreply@forankradkonferensen.se>',
             to: [email],
             subject: 'Slutför bokning',
-            react: EmailTemplate({ firstName: name, price: '250'}) as React.ReactElement,
+            react: EmailTemplate({ firstName: name, price: '250' }) as React.ReactElement,
         })
-        if(data.error) {
+        if (data.error) {
             return new Error()
         }
     } catch (err) {
@@ -62,7 +62,7 @@ const Boka = () => {
     return (
         <div>
             <h1>Anmäl</h1>
-            <BookingForm bookEvent={handleBooking}/>
+            <BookingForm bookEvent={handleBooking} />
         </div>
     );
 }
