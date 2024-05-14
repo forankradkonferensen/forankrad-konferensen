@@ -63,18 +63,20 @@ export async function getGeneralInformation(): Promise<GeneralInformation> {
         throw error; // Re-throw the error to handle it in the calling code
     }
 }
-// getTestimonials return a 2d array with the structure [namn, testimonial, bildId]
-export async function getTestimonials(): Promise<string[][] | undefined> {
+
+export async function getSpeakersAndTestimonials(): Promise<{ testimonials: string[][] | undefined, speakers: string[][] | undefined }> {
     try {
-        const res = await sheets.spreadsheets.values.get({
+        const res = await sheets.spreadsheets.values.batchGet({
             spreadsheetId: process.env.CONTRIBUTORS_ID,
-            range: 'testimonials',
+            ranges: ['testimonials', 'talare'],
         });
-        const data: string[][] | undefined | null = res.data.values;
-        const dataWithoutFirstRow: string[][] | undefined | null = data?.splice(1);
-        return dataWithoutFirstRow;
+        const testimonialsData: string[][] | undefined = res.data.valueRanges?.[0].values?.splice(1);
+        const speakersData: string[][] | undefined = res.data.valueRanges?.[1].values?.splice(1);
+
+        return { testimonials: testimonialsData, speakers: speakersData };
     } catch (error) {
-        console.error('Cannot fetch from google sheets:', error);
+        console.error('Cannot fetch from Google Sheets:', error);
+        return { testimonials: undefined, speakers: undefined };
     }
 }
 // getSchedule returns a 2d array with time and event [[9:00, gudstjänst], [12:00, lunch]]

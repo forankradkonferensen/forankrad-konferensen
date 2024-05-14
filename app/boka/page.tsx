@@ -6,7 +6,7 @@ import { Resend } from 'resend';
 const handleBooking = async (prevState: any, formData: FormData) => {
     'use server'
     const name = formData.get("name")?.toString() ?? "";
-    const lastName = formData.get("lastName")?.toString() ?? "";
+    const lastname = formData.get("lastName")?.toString() ?? "";
     const email = formData.get("email")?.toString() ?? "";
     const confirmEmail = formData.get("emailConfirmation")?.toString() ?? "";
 
@@ -14,7 +14,7 @@ const handleBooking = async (prevState: any, formData: FormData) => {
         return { message: 'Email fälten matchar inte' };
     }
     try {
-        const book = await bookEvent([name, lastName, email, 'nej']);
+        const book = await bookEvent([name, lastname, email, 'nej']);
         if (book instanceof Error) {
             if (book.message === 'fullbokat') {
                 return { message: 'Ledsen det finns inga platser lediga just nu' };
@@ -29,7 +29,7 @@ const handleBooking = async (prevState: any, formData: FormData) => {
         }
         if (book instanceof Error) {
             if (book.message === 'dubbelbokning') {
-                return { message: 'Du har redan påbörjat en bokning! Vi skickar ett nytt mail till dig så du kan slutföra bokningen.' };
+                return { message: 'Du har redan påbörjat en bokning! Vi skickar ett nytt mail till dig så du kan sluföra bokningen..' };
             }
         }
         return { message: 'Tack, kolla din email för att slutföra bokningen!' }
