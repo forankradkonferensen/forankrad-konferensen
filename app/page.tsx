@@ -56,14 +56,13 @@ export default async function Home() {
           ))}
         </div>
       </div>
-
-      <div className='bg-lightBlue'> {/* Kommentarer */}
-        <div>
-          <h4 className='text-black text-xl text-center'>&ldquo;Jag ser fram emot...&rdquo;</h4>
-          <p className='text-black text-center'>- Emanuel</p>
-        </div>
-        <div>
-          {/* Lägg till bild  */}
+      <div className='bg-black px-48 w-full'>
+        <h1 className='text-3xl text-center pb-8 font-medium'>Talare</h1>
+        <div className='flex'>
+          <SpeakerCard namn={'Tatta'} efternamn={'Lennartsson'} tillfälle={'Seminarie 1'} bildId={'/Tatta_Lennartsson.jpeg'} />
+          <SpeakerCard namn={'Erik'} efternamn={'Valier'} tillfälle={'Kvällsgudstjänst'} bildId={'/Erik_Valier.jpeg'} />
+          <SpeakerCard namn={'Joel'} efternamn={'MacInnes'} tillfälle={'Seminarie 2'} bildId={'/Joel_MacInnes.webp'} />
+          <SpeakerCard namn={''} efternamn={''} tillfälle={''} bildId={'/missingPerson.png'} />
         </div>
       </div>
       <div className='bg-black px-48 py-24 w-full'> {/* Vanliga frågor/FAQ */}
