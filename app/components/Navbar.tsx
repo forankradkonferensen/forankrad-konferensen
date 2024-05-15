@@ -12,10 +12,9 @@ const Navbar = () => {
                 </div>
             </div>
             <div className="navbar-center">
-                <img className='w-52' src="/logo.svg" alt="Förankrad" />
+                <a className='btn btn-ghost' href="/"> <img className='w-52' src="/logo.svg" alt="Förankrad" /></a>
             </div>
             <div className="navbar-end">
-                <p className='px-3'><a href='/'>Hem</a></p>
                 <p className='px-3'><a href='boka'>Anmälan</a></p>
             </div>
         </div>
