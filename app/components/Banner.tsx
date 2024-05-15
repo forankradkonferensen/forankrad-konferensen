@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 
 type BannerTypes = {
     title?: string;
@@ -6,9 +6,10 @@ type BannerTypes = {
     bibleRef?: string;
     buttonText?: string;
     buttonHref?: string;
+    image?: string;
 }
 
-const Banner: React.FC<BannerTypes> = ({ title, text, bibleRef, buttonText, buttonHref }) => {
+const Banner: React.FC<BannerTypes> = ({ title, text, bibleRef, buttonText, buttonHref, image }) => {
     return (
         <div className='relative h-full'>
             <video width="100%" height="auto" autoPlay muted loop playsInline className='opacity-40 w-full'>
@@ -22,9 +23,9 @@ const Banner: React.FC<BannerTypes> = ({ title, text, bibleRef, buttonText, butt
                 <a className='btn bg-white hover:bg-whiteShade outline-none w-32 text-black' href={buttonHref}>{buttonText}</a>
             </div>
 
+            <img className='absolute bottom-0 left-0 w-3/5 pl-1' src={image} alt="" />
         </div>
-    )
+    );
 }
 
-export default Banner
-
+export default Banner;
