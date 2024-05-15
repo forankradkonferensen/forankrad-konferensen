@@ -6,7 +6,7 @@ import { Resend } from 'resend';
 const handleBooking = async (prevState: any, formData: FormData) => {
     'use server'
     const name = formData.get("name")?.toString() ?? "";
-    const lastname = formData.get("lastName")?.toString() ?? "";
+    const lastName = formData.get("lastName")?.toString() ?? "";
     const email = formData.get("email")?.toString() ?? "";
     const confirmEmail = formData.get("emailConfirmation")?.toString() ?? "";
 
@@ -14,7 +14,7 @@ const handleBooking = async (prevState: any, formData: FormData) => {
         return { message: 'Email fälten matchar inte' };
     }
     try {
-        const book = await bookEvent([name, lastname, email, 'nej']);
+        const book = await bookEvent([name, lastName, email, 'nej']);
         if (book instanceof Error) {
             if (book.message === 'fullbokat') {
                 return { message: 'Ledsen det finns inga platser lediga just nu' };
@@ -47,7 +47,7 @@ const sendEmailBookingConfirmation = async (email: string, name: string) => {
             from: 'Förankrad Konferensen <noreply@forankradkonferensen.se>',
             to: [email],
             subject: 'Slutför bokning',
-            react: EmailTemplate({ firstName: name, price: '250' }) as React.ReactElement,
+            react: EmailTemplate({ firstName: name, price: '270' }) as React.ReactElement,
         })
         if (data.error) {
             return new Error()
