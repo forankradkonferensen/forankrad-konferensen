@@ -6,7 +6,7 @@ const Navbar = () => {
         <div className="navbar bg-black px-8 fixed top-0 w-full z-50 opacity-90">
             <div className="navbar-start">
                 <div>
-                    <a href="https://www.instagram.com/forankradkonferensen/">
+                    <a target='_blank' href="https://www.instagram.com/forankradkonferensen/">
                         <img className="w-8 h-8 filter invert" src="/instagram.svg" alt="Instagram" />
                     </a>
                 </div>
