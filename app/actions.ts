@@ -24,7 +24,7 @@ export const handleBooking = async (prevState: any, formData: FormData) => {
     if (approve !== 'on') {
         return { message: 'Du måste godkänna att vi behandlar dina personuppgifter' };
     }
-    if (personalNumber.length !== 13 || personalNumber[8] === '-') {
+    if (personalNumber.length !== 13 || personalNumber[8] !== '-') {
         return { message: 'Personnumret borde vara i detta format: xxxxxxxx-xxxx' };
     }
     if (phoneNumber.length !== 12 || phoneNumber[0] !== '+') {
