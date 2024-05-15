@@ -25,7 +25,7 @@ const Banner: React.FC<BannerTypes> = ({ title, text, bibleRef, buttonText, butt
                 )}
             </div>
 
-            <img className='absolute bottom-0 left-0 w-3/5 pl-1' src={image} alt="" />
+            <img className='absolute bottom-0 left-0 w-3/4 pl-1' src={image} alt="" />
         </div>
     );
 }
