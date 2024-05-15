@@ -66,7 +66,7 @@ export default async function Home() {
         </div>
       </div>
       <div className='bg-black px-48 py-24 w-full'> {/* Vanliga frågor/FAQ */}
-        <h1 className='text-3xl text-center pb-10'>Vanliga frågor</h1>
+        <h1 className='text-3xl text-center pb-8 font-medium'>Vanliga frågor</h1>
         <div className='container'>
           {faq?.map((value, index) => (
             <div className='mx-auto w-full max-w-md' key={index}>
@@ -76,7 +76,7 @@ export default async function Home() {
         </div>
       </div>
       <div className='bg-black px-48 py-24 w-full flex flex-col'> {/* Kontakta oss Mail */}
-        <h1 className='text-3xl text-center pb-5'>Kontakta oss</h1>
+        <h1 className='text-3xl text-center p-1 font-medium'>Kontakta oss</h1>
         <a className='text-xl flex justify-center underline decoration-1 underline-offset-4' href="forankradkonferensen@gmail.com">forankradkonferensen@gmail.com</a>
       </div>
       <div>

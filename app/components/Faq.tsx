@@ -11,13 +11,19 @@ const Faq: React.FC<FaqTypes> = ({ question, answer }) => {
   return (
     <div>
       <div className="flex flex-row items-center">
-        <button className="btn btn-circle bg-white" onClick={() => setShowContent(prev => !prev)}>{showContent ? '-' : '+'}</button>
-        <div>
-          <p className="basis-3/4 p-2">{question}</p>
-          <p className="basis-3/4">{showContent && answer}</p>
-        </div>
+        <button className="btn btn-circle bg-white" onClick={() => setShowContent(prev => !prev)}>
+          {showContent ? '-' : '+'}
+        </button>
+        <p className="basis-3/4 text-center p-4 font-medium">{question}</p>
       </div>
+      {showContent && (
+        <div>
+          <p className="basis-3/4 text-sm font-thin text-whiteShade">{answer}</p>
+        </div>
+      )}
     </div>
+
+
   )
 }
 
