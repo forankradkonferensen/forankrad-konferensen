@@ -7,10 +7,10 @@ interface Speaker {
   bildId: string;
 }
 
-const SpeakerCard: React.FC<Speaker> = ({ namn, efternamn, tillfälle, bildId: bildId }) => {
+const SpeakerCard: React.FC<Speaker> = ({ namn, efternamn, tillfälle, bildId}) => {
   return (
     <div className="card-body">
-      {bildId && <Image src={bildId} width={100} height={100} alt='bild på talare' />}
+      {bildId && <Image src={`https://drive.google.com/uc?id=${bildId}`} width={100} height={100} alt='bild på talare' />}
       <h2 className="card-title">{namn} {efternamn}</h2>
       <p>{tillfälle}</p>
     </div>

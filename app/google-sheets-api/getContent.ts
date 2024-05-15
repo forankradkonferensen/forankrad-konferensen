@@ -27,13 +27,13 @@ const sheets = google.sheets({ version: 'v4', auth });
 // get general information for the website
 type GeneralInformation = {
     datum: string;
-    om: string;
-    tema: string;
-    omTema: string;
+    årtal: string;
+    klockslag: string;
     bibelord: string;
     bibelRef: string;
     pris: string;
     plats: string;
+    adress: string;
 };
 
 export async function getGeneralInformation(): Promise<GeneralInformation> {
@@ -44,16 +44,16 @@ export async function getGeneralInformation(): Promise<GeneralInformation> {
         });
         const data: string[][] | undefined | null = res.data.values;
         if (data) {
-            const [datum, om, tema, omTema, bibelord, bibelRef, pris, plats] = data[1];
+            const [datum, årtal, klockslag, bibelord, bibelRef, pris, plats, adress] = data[1];
             return {
                 datum,
-                om,
-                tema,
-                omTema,
+                årtal,
+                klockslag,
                 bibelord,
                 bibelRef,
                 pris,
                 plats,
+                adress
             };
         } else {
             throw new Error('No data found in the spreadsheet.');

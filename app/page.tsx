@@ -9,7 +9,7 @@ export const revalidate = 0
 
 export default async function Home() {
   const general = await getGeneralInformation()
-  const { datum, om, tema, omTema, bibelord, bibelRef, pris, plats } = general
+  const { datum, årtal, klockslag, bibelord, bibelRef, pris, plats, adress } = general
   const testimonials = (await getSpeakersAndTestimonials()).testimonials;
   const speakers = (await getSpeakersAndTestimonials()).speakers;
   const faq = await getFaQ()
@@ -19,7 +19,7 @@ export default async function Home() {
   return (
     <div>
       <Navbar />
-      <Banner title={datum} text={plats} buttonHref='/boka' buttonText="Anmäl dig" image='/logo.svg' />
+      <Banner title={datum + ' ' + årtal} text={plats} buttonHref='/boka' buttonText="Anmäl dig" image='/logo.svg' />
       <div className='bg-black px-48 py-24 w-full flex flex-row'> {/* Information om vad konferensen står för */}
         <div>
           <h1 className='text-4xl pb-5 font-medium'>En konferens för dig som är ung vuxen</h1>
@@ -32,16 +32,16 @@ export default async function Home() {
       <Banner text={bibelord} bibleRef={bibelRef} />
       <div className='bg-black px-48 py-24 w-full'> {/* Information om konferensen */}
         <h1 className='text-4xl pb-5 font-medium'>När?</h1>
-        <h4 className='text-2xl pb-5'>28 september kl 9:45</h4>
+        <h4 className='text-2xl pb-5'>{datum} kl {klockslag}</h4>
         <h1 className='text-4xl pb-5 font-medium'>Var?</h1>
-        <h4 className='text-2xl pb-2'>I Pingstkyrkan Västra Frölunda</h4>
-        <h4 className='text-2xl pb-5'>Diamantgatan 3, 421 52 Västra Frölunda</h4>
+        <h4 className='text-2xl pb-2'>{plats}</h4>
+        <h4 className='text-2xl pb-5'>{adress}</h4>
         <h1 className='text-4xl pb-5 font-medium'>Vem?</h1>
         <h4 className='text-2xl'>Konferensen riktar sig till dig som är mellan 19-35 år.</h4>
       </div>
       <div className='bg-brown px-48 py-24 w-full'> {/* Kostnad för konferensen */}
         <h1 className='text-3xl text-center pb-8 font-medium'>Pris</h1>
-        <h4 className='text-xl text-center pb-8 font-medium'>270 kr för hela dagen</h4>
+        <h4 className='text-xl text-center pb-8 font-medium'>{pris} kr för hela dagen</h4>
         <p className='text-center text-xs'>I priset ingår brunch, lättlunch & middag</p>
         <p className='text-center text-xs'>Anmälan är bindande</p>
       </div>
@@ -51,6 +51,7 @@ export default async function Home() {
         <div className='text-lg text-center font-medium'>
           {schedule?.map((value, index) => (
             <div key={index}>
+              {/* event and time in array */}
               <span>{value[0]} {value[1]}</span>
             </div>
           ))}
@@ -59,10 +60,12 @@ export default async function Home() {
       <div className='bg-black px-48 w-full'>
         <h1 className='text-3xl text-center pb-8 font-medium'>Talare</h1>
         <div className='flex'>
-          <SpeakerCard namn={'Tatta'} efternamn={'Lennartsson'} tillfälle={'Seminarie 1'} bildId={'/Tatta_Lennartsson.jpeg'} />
-          <SpeakerCard namn={'Erik'} efternamn={'Valier'} tillfälle={'Kvällsgudstjänst'} bildId={'/Erik_Valier.jpeg'} />
-          <SpeakerCard namn={'Joel'} efternamn={'MacInnes'} tillfälle={'Seminarie 2'} bildId={'/Joel_MacInnes.webp'} />
-          <SpeakerCard namn={''} efternamn={''} tillfälle={''} bildId={'/missingPerson.png'} />
+          {speakers?.map((speaker, index) => (
+            <div key={index}>
+              <SpeakerCard namn={speaker[0]} efternamn={speaker[1]} tillfälle={speaker[2]} bildId={speaker[3]}/>
+            </div>
+          ))
+          }
         </div>
       </div>
       <div className='bg-black px-48 py-24 w-full'> {/* Vanliga frågor/FAQ */}
@@ -70,6 +73,7 @@ export default async function Home() {
         <div className='container'>
           {faq?.map((value, index) => (
             <div className='mx-auto w-full max-w-md' key={index}>
+              {/* question and answer in array */}
               <Faq question={value[0]} answer={value[1]} />
             </div>
           ))}
