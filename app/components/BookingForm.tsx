@@ -27,7 +27,7 @@ const BookingForm: React.FC<action> = ({ bookEvent }) => {
         <label className="text-sm font-light text-whiteShade flex p-1 pt-4" htmlFor="lastName">Efternamn</label>
         <input className="text-sm font-light bg-whiteShade text-black flex input input-bordered w-full max-w-xs" type="text" id="lastName" name="lastName" placeholder="Efternamn" required />
 
-        <label className="text-sm font-light text-whiteShade flex p-1 pt-4" htmlFor="personalNumber">Personnummer</label>
+        <label className="text-sm font-light text-whiteShade flex p-1 pt-4" htmlFor="personalNumber">Personnummer (12 siffror)</label>
         <input className="text-sm font-light bg-whiteShade text-black flex input input-bordered w-full max-w-xs" type="number" id="personalNumber" name="personalNumber" placeholder="xxxxxxxx-xxxx" required />
 
         <label className="text-sm font-light text-whiteShade flex p-1 pt-4" htmlFor="address">Adress</label>
@@ -36,9 +36,8 @@ const BookingForm: React.FC<action> = ({ bookEvent }) => {
         <label className="text-sm font-light text-whiteShade flex p-1 pt-4" htmlFor="zipCode">Postnummer</label>
         <input className="text-sm font-light bg-whiteShade text-black flex input input-bordered w-full max-w-xs" type="number" id="zipCode" name="zipCode" placeholder="123 45" required />
 
-        <label className="text-sm font-light text-whiteShade flex p-1 pt-4" htmlFor="areaCode">Postort</label>
-        <input className="text-sm font-light bg-whiteShade text-black flex input input-bordered w-full max-w-xs" type="text" id="areaCode" name="areaCode" placeholder="Västra Götaland" required />
-
+        <label className="text-sm font-light text-whiteShade flex p-1 pt-4" htmlFor="postCode">Postort</label>
+        <input className="text-sm font-light bg-whiteShade text-black flex input input-bordered w-full max-w-xs" type="text" id="postCode" name="postCode" placeholder="Västra Götaland" required />
 
         <label className="text-sm font-light text-whiteShade flex p-1 pt-4" htmlFor="email">Mejladress</label>
         <input className="text-sm font-light bg-whiteShade text-black flex input input-bordered w-full max-w-xs" type="email" id="email" name="email" placeholder="mejladress@domän.se" required />

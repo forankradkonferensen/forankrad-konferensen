@@ -6,9 +6,12 @@ import { Resend } from 'resend';
 export const handleBooking = async (prevState: any, formData: FormData) => {
     const name = formData.get('name')?.toString() ?? '';
     const lastName = formData.get('lastName')?.toString() ?? '';
+    const personalNumber = formData.get('personalNumber')?.toString().trim() ?? '';
+    const address = formData.get('address')?.toString() ?? '';
+    const zipCode = formData.get('zipCode')?.toString() ?? '';
+    const postCode = formData.get('postCode')?.toString() ?? '';
     const email = formData.get('email')?.toString() ?? '';
     const confirmEmail = formData.get('emailConfirmation')?.toString() ?? '';
-    const personalNumber = formData.get('personalNumber')?.toString().trim() ?? '';
     const phoneNumber = formData.get('phoneNumber')?.toString().trim() ?? '';
     const denomination = formData.get('denomination')?.toString() ?? '';
     const message = formData.get('message')?.toString() ?? '';
@@ -32,6 +35,9 @@ export const handleBooking = async (prevState: any, formData: FormData) => {
             name,
             lastName,
             personalNumber,
+            address,
+            zipCode,
+            postCode,
             email,
             phoneNumber,
             denomination,
