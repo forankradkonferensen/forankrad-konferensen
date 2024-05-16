@@ -7,7 +7,7 @@ const Navbar = () => {
             <div className="navbar-start">
                 <div>
                     <a target='_blank' href="https://www.instagram.com/forankradkonferensen/">
-                        <img className="w-8 h-8  filter invert" src="/instagram.svg" alt="Instagram" />
+                        <Image width={32} height={32} className="filter invert" src="/instagram.svg" alt="Instagram" />
                     </a>
                 </div>
             </div>
