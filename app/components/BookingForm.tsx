@@ -34,7 +34,7 @@ const BookingForm: React.FC<action> = ({ bookEvent }) => {
         <input className="text-sm font-light bg-whiteShade text-black flex input input-bordered w-full max-w-xs" type="text" id="address" name="address" placeholder="Diamantgatan 1" required />
 
         <label className="text-sm font-light text-whiteShade flex p-1 pt-4" htmlFor="zipCode">Postnummer</label>
-        <input className="text-sm font-light bg-whiteShade text-black flex input input-bordered w-full max-w-xs" type="number" id="zipCode" name="zipCode" placeholder="123 45" required />
+        <input className="text-sm font-light bg-whiteShade text-black flex input input-bordered w-full max-w-xs" type="number" id="zipCode" name="zipCode" placeholder="12345" required />
 
         <label className="text-sm font-light text-whiteShade flex p-1 pt-4" htmlFor="postCode">Postort</label>
         <input className="text-sm font-light bg-whiteShade text-black flex input input-bordered w-full max-w-xs" type="text" id="postCode" name="postCode" placeholder="Göteborg" required />
