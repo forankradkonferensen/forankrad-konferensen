@@ -5,8 +5,8 @@ function SubmitButton() {
   const { pending } = useFormStatus()
 
   return (
-    <button className="btn btn-outline w-full max-w-xs my-5" type="submit" disabled={pending}>
-      {pending ? "Ett ögonblick..." : "Boka"}
+    <button className="btn btn-outline bg-whiteShade text-black w-full max-w-xs my-5" type="submit" disabled={pending}>
+      {pending ? "Ett ögonblick..." : "Skicka"}
     </button>
   )
 }
@@ -55,7 +55,7 @@ const BookingForm: React.FC<action> = ({ bookEvent }) => {
         <textarea className="text-sm font-light bg-whiteShade text-black flex textarea textarea-bordered w-full max-w-xs" id="message" name="message" placeholder="Jag tål inte nötter..." ></textarea>
         <label className="text-xs font-light text-whiteShade flex p-1 pt-4" htmlFor="approve">Jag godkänner att Pingstkyrkan Västra Frölunda behandlar mina personuppgifter. Det kommer också fotas under helgen i dokumentations- och marknadsföringssyfte. Vill du inte vara med på bild, mejla forankradkonferensen@gmail.com</label>
         <div className="flex items-center">
-          <input className="checkbox border-2 flex p-1" type="checkbox" id="approve" name="approve" required />
+          <input className="checkbox bg-whiteShade border-2 flex p-1" type="checkbox" id="approve" name="approve" required />
           <label className="text-xs font-light text-whiteShade flex pl-2">Ja</label>
         </div>
 
