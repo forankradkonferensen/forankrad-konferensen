@@ -21,7 +21,7 @@ const Banner: React.FC<BannerTypes> = ({ title, text, bibleRef, buttonText, butt
                 <h4 className="text-lg md:text-2xl p-2 px-6 md:px-12 lg:px-24 xl:px-48 font-medium">{text}</h4>
                 <p className="text-sm md:text-base">{bibleRef}</p>
                 {buttonHref && buttonText && (
-                    <a className="btn bg-white hover:bg-whiteShade outline-none w-32 md:w-48 text-black" href={buttonHref}>{buttonText}</a>
+                    <a className="btn bg-white hover:bg-whiteShade outline-none w-30 md:w-48 text-black" href={buttonHref}>{buttonText}</a>
                 )}
             </div>
             <div className="absolute bottom-0 left-0">
