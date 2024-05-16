@@ -14,7 +14,6 @@ const Boka = () => {
                 <p className="text-sm md:text-base pb-4 md:pb-6 font-light text-whiteShade">Hej! vad kul att du kommer på konferensen Förankrad! Vi längtar efter att göra den här dagen tillsammans med dig och Gud! Vi tror och ber att den här dagen ska få dra oss närmare varandra och Honom som förtjänar all ära! Samla dina vänner så ses vi den 28e september!</p>
                 <p className="text-sm md:text-base pb-4 md:pb-6 font-light text-whiteShade">Dagen kostar 270 kr (inkl brunch, lunch och kvällsmat)</p>
                 <p className="text-sm md:text-base pb-4 md:pb-6 font-light text-whiteShade">Anmälan är bindande. Du kommer att få ett bekräftelsemejl med betalningsinformation.</p>
-                <p className="text-sm md:text-base pb-4 md:pb-6 font-light text-whiteShade italic">Dyker man inte upp, fakturerar vi i efterhand.</p>
                 <BookingForm bookEvent={handleBooking} />
             </div>
 
