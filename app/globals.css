@@ -5,3 +5,7 @@
 body {
   color: white;
 }
+
+.custom-opacity {
+  opacity: 0.4;
+}
