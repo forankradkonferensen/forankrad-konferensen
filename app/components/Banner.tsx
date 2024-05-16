@@ -12,7 +12,7 @@ type BannerTypes = {
 const Banner: React.FC<BannerTypes> = ({ title, text, bibleRef, buttonText, buttonHref, image }) => {
     return (
        <div className="relative h-screen overflow-hidden">
-    <video width="100%" height="auto" autoPlay muted loop playsInline className="opacity-40 disable-opacity w-full">
+    <video width="100%" height="auto" autoPlay muted loop playsInline className="opacity-40 disable-opacity object-cover absolute inset-0 h-full w-full">
         <source src="backgroundVideo.mp4" type="video/mp4" />
     </video>
 
@@ -25,7 +25,7 @@ const Banner: React.FC<BannerTypes> = ({ title, text, bibleRef, buttonText, butt
         )}
     </div>
 
-    <img className="absolute bottom-0 left-0 w-3/4 pl-1" src={image} alt="" />
+    <img className="absolute bottom-0 left-0 h-1/2 md:h-3/4 w-auto md:w-3/4 pl-1" src={image} alt="" />
 </div>
 
     );
