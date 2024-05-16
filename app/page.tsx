@@ -60,7 +60,7 @@ export default async function Home() {
       </div>
       <div className='bg-black px-6 md:px-12 lg:px-24 xl:px-48 w-full'> {/* Talare för eventet */}
         <h1 className='text-2xl lg:text-3xl text-center pb-4 lg:pb-8 font-medium'>Talare</h1>
-        <div className='flex'>
+        <div className='flex flex-col md:flex-row'>
           {speakers?.map((speaker, index) => (
             <div key={index} className="mb-4 md:mr-4">
               <SpeakerCard namn={speaker[0]} efternamn={speaker[1]} tillfälle={speaker[2]} bildId={speaker[3]} />
