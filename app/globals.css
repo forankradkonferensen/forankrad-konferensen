@@ -11,3 +11,9 @@
 body {
   color: white;
 }
+
+@media (max-width: 1040px) {
+  .disable-opacity {
+    opacity: 1 !important;
+  }
+}
