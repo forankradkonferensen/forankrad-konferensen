@@ -18,7 +18,7 @@ const Banner: React.FC<BannerTypes> = ({ title, text, bibleRef, buttonText, butt
 
             <div className="absolute inset-0 flex flex-col justify-center items-center text-center z-10">
                 <h1 className="text-4xl md:text-5xl font-semibold tracking-wider">{title}</h1>
-                <h4 className="text-lg md:text-2xl p-2 font-medium">{text}</h4>
+                <h4 className="text-lg md:text-2xl p-2 px-6 md:px-12 lg:px-24 xl:px-48 font-medium">{text}</h4>
                 <p className="text-sm md:text-base">{bibleRef}</p>
                 {buttonHref && buttonText && (
                     <a className="btn bg-white hover:bg-whiteShade outline-none w-32 md:w-48 text-black" href={buttonHref}>{buttonText}</a>
