@@ -12,7 +12,7 @@ type BannerTypes = {
 const Banner: React.FC<BannerTypes> = ({ title, text, bibleRef, buttonText, buttonHref, image }) => {
     return (
         <div className='relative h-full'>
-            <video width="100%" height="auto" autoPlay muted loop playsInline className='opacity-40 w-full'>
+            <video width="100%" height="auto" autoPlay muted loop playsInline className='w-full'>
                 <source src='backgroundVideo.mp4' type="video/mp4" />
             </video>
 
