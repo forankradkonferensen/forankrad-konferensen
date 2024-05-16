@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import './globals.css'
 import { Nanum_Gothic } from 'next/font/google'
 
-const nanum_Gothic = Nanum_Gothic({
+const nanumGothic = Nanum_Gothic({
   subsets: ['latin'],
   weight: '400'
 })
@@ -20,7 +20,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={nanum_Gothic.className}>{children}</body>
+      <body className={nanumGothic.className}>{children}</body>
     </html>
   )
 }
