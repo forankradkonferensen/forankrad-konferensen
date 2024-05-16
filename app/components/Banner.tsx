@@ -1,5 +1,5 @@
 import React from 'react';
-
+import Image from 'next/image';
 type BannerTypes = {
     title?: string;
     text?: string;
@@ -12,7 +12,7 @@ type BannerTypes = {
 const Banner: React.FC<BannerTypes> = ({ title, text, bibleRef, buttonText, buttonHref, image }) => {
     return (
        <div className="relative h-screen overflow-hidden">
-    <video width="100%" height="auto" autoPlay muted loop playsInline className="opacity-40 disable-opacity object-cover absolute inset-0 h-full w-full">
+    <video width="100%" height="auto" autoPlay muted loop playsInline className="opacity-80 object-cover absolute inset-0 h-full w-full">
         <source src="backgroundVideo.mp4" type="video/mp4" />
     </video>
 
@@ -24,8 +24,9 @@ const Banner: React.FC<BannerTypes> = ({ title, text, bibleRef, buttonText, butt
             <a className="btn bg-white hover:bg-whiteShade outline-none w-32 md:w-48 text-black" href={buttonHref}>{buttonText}</a>
         )}
     </div>
-
-    <img className="absolute bottom-0 left-0 h-1/2 md:h-3/4 w-auto md:w-3/4 pl-1" src={image} alt="" />
+    <div className="absolute bottom-0 left-0">
+        <Image width={1500} height={1500}  src={image} alt="" />
+    </div>
 </div>
 
     );
