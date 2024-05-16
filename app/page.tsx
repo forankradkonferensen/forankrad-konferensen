@@ -62,7 +62,7 @@ export default async function Home() {
         <div className='flex'>
           {speakers?.map((speaker, index) => (
             <div key={index}>
-              <SpeakerCard namn={speaker[0]} efternamn={speaker[1]} tillfälle={speaker[2]} bildId={speaker[3]}/>
+              <SpeakerCard namn={speaker[0]} efternamn={speaker[1]} tillfälle={speaker[2]} bildId={speaker[3]} />
             </div>
           ))
           }
@@ -84,7 +84,7 @@ export default async function Home() {
         <a className='text-xl flex justify-center underline decoration-1 underline-offset-4' href="forankradkonferensen@gmail.com">forankradkonferensen@gmail.com</a>
       </div>
       <div>
-        <p className='bg-black px-48 py-2 text-sm font-extralight'>Hemsida skapad av: Emanuel Gustafzon och Simon Michael</p>
+        <p className='bg-black pl-3 pb-3 text-sm font-extralight'>Hemsida skapad av: Emanuel Gustafzon och Simon Michael</p>
       </div>
     </div>
   )

@@ -18,7 +18,7 @@ const Faq: React.FC<FaqTypes> = ({ question, answer }) => {
       </div>
       {showContent && (
         <div>
-          <p className="basis-3/4 text-sm font-thin text-whiteShade">{answer}</p>
+          <p className="basis-3/4 text-sm font-extralight text-whiteShade">{answer}</p>
         </div>
       )}
     </div>
