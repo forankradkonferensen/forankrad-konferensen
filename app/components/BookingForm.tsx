@@ -22,7 +22,7 @@ const BookingForm: React.FC<action> = ({ bookEvent }) => {
       <form action={formAction}>
 
         <label className="text-sm font-light text-whiteShade flex p-1" htmlFor="firstName">Förnamn</label>
-        <input className="text-sm font-light bg-whiteShade text-black flex input input-bordered w-full max-w-xs" type="text" id="firstName" name="fistName" placeholder="Förnamn" required />
+        <input className="text-sm font-light bg-whiteShade text-black flex input input-bordered w-full max-w-xs" type="text" id="firstName" name="firstName" placeholder="Förnamn" required />
 
         <label className="text-sm font-light text-whiteShade flex p-1 pt-4" htmlFor="lastName">Efternamn</label>
         <input className="text-sm font-light bg-whiteShade text-black flex input input-bordered w-full max-w-xs" type="text" id="lastName" name="lastName" placeholder="Efternamn" required />
