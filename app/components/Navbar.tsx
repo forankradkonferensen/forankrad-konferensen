@@ -1,5 +1,5 @@
 import React from 'react'
-
+import Image from 'next/image';
 
 const Navbar = () => {
     return (
@@ -7,12 +7,13 @@ const Navbar = () => {
             <div className="navbar-start">
                 <div>
                     <a target='_blank' href="https://www.instagram.com/forankradkonferensen/">
-                        <img className="w-8 h-8 filter invert" src="/instagram.svg" alt="Instagram" />
+                        <Image width={32} height={32} className="filter invert" src="/instagram.svg" alt="Instagram" />
                     </a>
                 </div>
             </div>
             <div className="navbar-center">
-                <a className='btn btn-ghost' href="/"> <img className='w-52' src="/logo.svg" alt="Förankrad" /></a>
+                <a className='btn btn-ghost' href="/"> <Image width={150} height={150} src="/logo.svg" alt="Förankrad" /></a>
+
             </div>
             <div className="navbar-end">
                 <p className='px-3'><a href='boka'>Anmälan</a></p>
