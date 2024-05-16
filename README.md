@@ -1,36 +1,49 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Förankrad Konferensen Project README
+
+## Introduction
+
+Welcome to the Förankrad Konferensen project! This README will guide you through the setup, technologies used, and how to contribute to the project.
+
+## Project Overview
+
+This project is specifically tailored for the Förankrad Konferensen event, hosted by Pingst Church Västra Frölunda. It is built using Next.js and deployed on Vercel. The platform enables attendees to access event information, make bookings, and receive confirmation emails.
+
+## Technologies Used
+
+Next.js: Next.js is a React framework for building server-side rendered and static websites.
+Vercel: Vercel is a cloud platform for static sites and serverless functions, perfect for deploying Next.js projects.
+Google Sheets: We utilize Google Sheets as our content management system and for storing bookings.
+Resend: Resend is used to send confirmation emails to users who make bookings.
+Tailwind: CSS framework. 
+DaisyUi: Library using tailwind for styled components.
 
 ## Getting Started
 
-First, run the development server:
+To work on the project, please contact us to get access and permissions.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+### Setup Requirements
+Before setting up the project, ensure you have the following:
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Google Service Account: You'll need a Google service account with access to the necessary Google Sheets containing information and permissions.
+Sheet IDs: Obtain the sheet IDs containing the required information, and grant permission to your client email in the service account.
+Resend Key and DNS Configuration: Obtain a Resend API key for sending confirmation emails and configure DNS for the domain.
+Domain Configuration: Configure the DNS for the domain where the project will be deployed.
+Project Structure
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+/app: Contains Next.js app files for routing and rendering.
+/components: Contains reusable React components.
+/public: Stores static assets such as images.
+/google-sheets-api contains the logic for retrieving information and set information in the sheets.
+/actions.ts is a file with server actions.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+The website fetches data from Google Sheets. When fetching images, only the ID is retrieved. It's the user's responsibility to input the ID into Google Sheets.
 
-## Learn More
+## Contribution
 
-To learn more about Next.js, take a look at the following resources:
+We welcome contributions to the project! Please reach out to us to discuss any enhancements, bug fixes, or new features you'd like to work on.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Contact Us
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+For inquiries or to work on the project, please contact Förankrad Konferensen Team.
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Thank you for your interest in our project! 🙏
