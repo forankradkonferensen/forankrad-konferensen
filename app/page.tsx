@@ -5,7 +5,8 @@ import { getGeneralInformation, getSpeakersAndTestimonials, getSchedule, getFaQ,
 import SpeakerCard from './components/SpeakerCard';
 import Faq from './components/Faq';
 
-export const revalidate = 0
+const oneHour = 1000 * 60 * 60;
+export const revalidate = oneHour;
 
 export default async function Home() {
   const general = await getGeneralInformation()
