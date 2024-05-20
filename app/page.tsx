@@ -5,7 +5,7 @@ import { getGeneralInformation, getSpeakersAndTestimonials, getSchedule, getFaQ,
 import SpeakerCard from './components/SpeakerCard';
 import Faq from './components/Faq';
 
-const oneHour = 1000 * 60 * 60;
+const oneHour = 3600;
 export const revalidate = oneHour;
 
 export default async function Home() {
