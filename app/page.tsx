@@ -25,7 +25,7 @@ export default async function Home() {
         <div className='lg:w-2/3'>
           <h1 className='text-3xl lg:text-4xl pb-3 lg:pb-5 font-medium'>En konferens för dig som är ung vuxen</h1>
           <h4 className='text-lg lg:text-2xl pb-5 lg:pb-10'>Förankrad är en dag som arrangeras av Pingstkyrkan Västra Frölunda och Ung Vuxen Pingst. En dag för dig att bli Utrustad, Uppmuntrad & Utmanad.</h4>
-          <h4 className='text-lg lg:text-2xl pb-5 lg:pb-10'>Vi ser fram emot go gemenskap med varandra, undervisning, samtal, workshops och tid med Gud! Varmt välkommen!</h4>
+          <h4 className='text-lg lg:text-2xl pb-5 lg:pb-10'>Vi ser fram emot go gemenskap med varandra, undervisning, samtal, workshops och tid med Gud!</h4>
           <h4 className='text-lg lg:text-2xl'>Varmt välkommen!</h4>
         </div>
         <div className='w-full lg:w-1/3'></div>
