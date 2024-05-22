@@ -1,5 +1,6 @@
 'use client'
 import { useFormStatus, useFormState } from "react-dom";
+import Gdpr from "./gdpr";
 
 function SubmitButton() {
   const { pending } = useFormStatus()
@@ -53,8 +54,11 @@ const BookingForm: React.FC<action> = ({ bookEvent }) => {
 
         <label className="text-sm font-light text-whiteShade flex p-1 pt-4" htmlFor="message">Meddelande / något speciellt vi behöver veta (ex. allergier):</label>
         <textarea className="text-sm font-light bg-whiteShade text-black flex textarea textarea-bordered w-full max-w-xs" id="message" name="message" placeholder="Jag tål inte nötter..." ></textarea>
-        <label className="text-xs font-light text-whiteShade flex p-1 pt-4" htmlFor="approve">Jag godkänner att Pingstkyrkan Västra Frölunda behandlar mina personuppgifter. Det kommer också fotas under helgen i dokumentations- och marknadsföringssyfte. Vill du inte vara med på bild, mejla forankradkonferensen@gmail.com</label>
-        <div className="flex items-center">
+        <label className="text-xs font-light text-whiteShade flex p1 pt-4">
+          Jag godkänner att Pingstkyrkan Västra Frölunda behandlar mina personuppgifter. Det kommer också fotas under helgen i dokumentations- och marknadsföringssyfte. Vill du inte vara med på bild, mejla forankradkonferensen@gmail.com
+        </label>
+        <Gdpr />
+        <div className="flex items-center pt-2">
           <input className="checkbox checkbox-success bg-whiteShade border-0 flex p-1" type="checkbox" id="approve" name="approve" required />
           <label className="text-xs font-light text-whiteShade flex pl-2">Ja</label>
         </div>
