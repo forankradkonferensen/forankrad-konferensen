@@ -1,8 +1,7 @@
 import { Suspense } from 'react';
 import dynamic from 'next/dynamic'
 import Navbar from './components/Navbar'
-
-const LazyBanner = dynamic(() => import('./components/Banner'));
+import Banner from './components/Banner';
 
 import { getGeneralInformation} from './google-sheets-api/getContent'
 import Speakers from './components/Speakers';
@@ -18,7 +17,7 @@ export default async function Home() {
   return (
     <div>
       <Navbar />
-      <LazyBanner title={datum + ' ' + årtal} text={plats} buttonHref='/boka' buttonText="Anmäl dig" image='/logo.svg' />
+      <Banner title={datum + ' ' + årtal} text={plats} buttonHref='/boka' buttonText="Anmäl dig" image='/logo.svg' />
       <div className='bg-black px-6 py-12 md:px-12 lg:px-24 xl:px-48 lg:py-24 w-full flex flex-col lg:flex-row'> {/* Information om vad konferensen står för */}
         <div className='lg:w-2/3'>
           <h1 className='text-3xl lg:text-4xl pb-3 lg:pb-5 font-medium'>En konferens för dig som är ung vuxen</h1>
@@ -29,7 +28,7 @@ export default async function Home() {
         <div className='w-full lg:w-1/3'></div>
       </div>
 
-      <LazyBanner text={bibelord} bibleRef={bibelRef} />
+      <Banner text={bibelord} bibleRef={bibelRef} />
       <div className='bg-black px-6 py-12 md:px-12 lg:px-24 xl:px-48 lg:py-24 w-full'> {/* Information om konferensen */}
         <h1 className='text-3xl lg:text-4xl pb-3 font-medium'>När?</h1>
         <h4 className='text-lg lg:text-2xl pb-3'>{datum} kl {klockslag}</h4>
@@ -45,7 +44,7 @@ export default async function Home() {
         <p className='text-center text-xs lg:text-sm'>I priset ingår brunch, lättlunch & middag</p>
         <p className='text-center text-xs lg:text-sm'>Anmälan är bindande</p>
       </div>
-      <LazyBanner buttonHref='https://www.instagram.com/forankradkonferensen/' buttonText='Följ Förankrad på Instagram' />
+      <Banner buttonHref='https://www.instagram.com/forankradkonferensen/' buttonText='Följ Förankrad på Instagram' />
       <div className="bg-black px-6 py-8 md:py-12 md:px-12 lg:px-24 xl:px-48 lg:py-16 xl:py-24 w-full"> {/* Schema */}
         <h1 className='text-xl md:text-2xl lg:text-3xl text-center pb-2 md:pb-4 lg:pb-8 font-medium'>Program för dagen</h1>
         <div className='text-base md:text-lg lg:text-xl text-center font-medium'>
