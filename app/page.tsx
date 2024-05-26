@@ -10,8 +10,8 @@ import Faqs from './components/Faqs';
 import Schedule from './components/Schedule';
 
 
-const oneHour = 3600;
-export const revalidate = oneHour;
+const twelveHours = 3600 * 12;
+export const revalidate = twelveHours;
 
 export default async function Home() {
   const { datum, årtal, klockslag, bibelord, bibelRef, pris, plats, adress } = await getGeneralInformation()

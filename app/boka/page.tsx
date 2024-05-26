@@ -3,6 +3,9 @@ import Navbar from "../components/Navbar"
 import { handleBooking } from "../actions";
 import { getGeneralInformation } from "../google-sheets-api/getContent";
 
+const twelveHours = 3600 * 12;
+export const revalidate = twelveHours;
+
 const Boka = async () => {
     const { datum, pris} = await getGeneralInformation()
     return (
