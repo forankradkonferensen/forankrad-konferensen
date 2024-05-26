@@ -20,7 +20,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={nanumGothic.className}>{children}</body>
+        <body className={nanumGothic.className}>{children}</body>
     </html>
   )
 }

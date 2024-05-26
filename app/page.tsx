@@ -4,9 +4,10 @@ import Navbar from './components/Navbar'
 
 const LazyBanner = dynamic(() => import('./components/Banner'));
 
-import { getGeneralInformation, getSpeakersAndTestimonials, getSchedule, getFaQ, getWorkshopsAndSeminars } from './google-sheets-api/getContent'
-import SpeakerCard from './components/SpeakerCard';
-import Faq from './components/Faq';
+import { getGeneralInformation} from './google-sheets-api/getContent'
+import Speakers from './components/Speakers';
+import Faqs from './components/Faqs';
+import Schedule from './components/Schedule';
 
 
 const oneHour = 3600;
@@ -14,10 +15,6 @@ export const revalidate = oneHour;
 
 export default async function Home() {
   const { datum, årtal, klockslag, bibelord, bibelRef, pris, plats, adress } = await getGeneralInformation()
-  const speakers = (await getSpeakersAndTestimonials()).speakers;
-  const faq = await getFaQ()
-  const schedule = await getSchedule()
-
   return (
     <div>
       <Navbar />
@@ -31,6 +28,7 @@ export default async function Home() {
         </div>
         <div className='w-full lg:w-1/3'></div>
       </div>
+
       <LazyBanner text={bibelord} bibleRef={bibelRef} />
       <div className='bg-black px-6 py-12 md:px-12 lg:px-24 xl:px-48 lg:py-24 w-full'> {/* Information om konferensen */}
         <h1 className='text-3xl lg:text-4xl pb-3 font-medium'>När?</h1>
@@ -51,38 +49,27 @@ export default async function Home() {
       <div className="bg-black px-6 py-8 md:py-12 md:px-12 lg:px-24 xl:px-48 lg:py-16 xl:py-24 w-full"> {/* Schema */}
         <h1 className='text-xl md:text-2xl lg:text-3xl text-center pb-2 md:pb-4 lg:pb-8 font-medium'>Program för dagen</h1>
         <div className='text-base md:text-lg lg:text-xl text-center font-medium'>
-          {schedule?.map((value, index) => (
-            <div key={index} className="pb-1 md:pb-2">
-              {/* event and time in array */}
-              <span>{value[0]} {value[1]}</span>
-            </div>
-          ))}
+          <Suspense fallback='hämtar schema...'> 
+            <Schedule/>
+          </Suspense>
         </div>
       </div>
+
       <div className='bg-black px-6 md:px-12 lg:px-24 xl:px-48 w-full'> {/* Talare för eventet */}
         <h1 className='text-2xl lg:text-3xl text-center pb-4 lg:pb-8 font-medium'>Talare</h1>
         <div className='flex flex-col md:flex-row'>
-          {speakers?.map((speaker, index) => (
-            <div key={index} className="mb-4 md:mr-4">
-              <Suspense fallback='hämtar talare...'>
-              <SpeakerCard namn={speaker[0]} efternamn={speaker[1]} tillfälle={speaker[2]} bildId={speaker[3]} />
-              </Suspense>
-            </div>
-          ))}
+          <Suspense fallback='hämtar talare...'>
+            <Speakers/>
+          </Suspense>
         </div>
       </div>
 
       <div className='bg-black px-6 md:px-12 lg:px-24 xl:px-48 py-12 md:py-24 w-full'> {/* Vanliga frågor/FAQ */}
         <h1 className='text-2xl lg:text-3xl text-center pb-4 lg:pb-8 font-medium'>Vanliga frågor</h1>
         <div className='container mx-auto'>
-          {faq?.map((value, index) => (
-            <div className='mx-auto w-full max-w-md' key={index}>
-              {/* question and answer in array */}
-              <Suspense fallback='hämtar frågot och svar...'>
-              <Faq question={value[0]} answer={value[1]} />
-              </Suspense>
-            </div>
-          ))}
+          <Suspense fallback='hämtar frågot och svar...'>
+            <Faqs/>
+          </Suspense>
         </div>
       </div>
 
