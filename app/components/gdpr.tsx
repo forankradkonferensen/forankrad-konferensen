@@ -8,7 +8,7 @@ const Gdpr = () => {
         <div>
             {showModal ? (
                 <dialog className="modal" open>
-                    <div className="modal-box">
+                    <div className="modal-box bg-brown">
                         <button
                             onClick={() => setShowModal(prev => !prev)}
                             className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
