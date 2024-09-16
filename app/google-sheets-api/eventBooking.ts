@@ -10,7 +10,7 @@ export async function bookEvent(bookingData: string[]) {
         const rows = response.data.values || [];
         const nonEmptyRows = rows.filter(row => row.length > 0);
 
-        const maxPossibleBookings = 271;
+        const maxPossibleBookings = 286;
         if (nonEmptyRows.length >= maxPossibleBookings) {
             console.log("Ledsen, det finns inga platser kvar");
             return new Error('fullbokat');
