@@ -6,10 +6,10 @@ interface EmailTemplateProps {
 export const EmailTemplate: React.FC<Readonly<EmailTemplateProps>> = () => (
   <div>
     <h1>Du är anmäld till Förankrad!</h1>
-    <p>Vi ser så fram emot att ses den 28e september</p>
+    <p>Vi ser så fram emot att ses den 27e september</p>
     <br />
     <p>
-      Vänligen swisha <span className="font-bold">350kr</span> till{" "}
+      Vänligen swisha <span className="font-bold">359kr</span> till{" "}
       <span className="font-bold">123 588 11 07</span> eller med hjälp av
       QR-koden här nedan.
     </p>
@@ -18,7 +18,7 @@ export const EmailTemplate: React.FC<Readonly<EmailTemplateProps>> = () => (
     </strong>
     <br />
     <img
-      src="https://drive.google.com/uc?id=1IUNctCQGskCW95_ncHUlH8SiRjyBoGmG"
+      src="https://drive.google.com/uc?id=1dtcj_N9Q9kiNumRJlKNRvg4AGTVuZ2Ql"
       alt="123-588 11 07"
       width={200}
       height={300}
