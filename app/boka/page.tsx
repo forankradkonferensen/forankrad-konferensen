@@ -11,13 +11,13 @@ const Boka = async () => {
   return (
     <div>
       <Navbar />
-      <div className="bg-black px-8 md:px-16 lg:px-24 xl:px-48 py-20 lg:py-24 w-full">
+      <div className="hidden bg-black px-8 md:px-16 lg:px-24 xl:px-48 py-20 lg:py-24 w-full">
         <h1 className="text-2xl md:text-3xl lg:text-4xl xl:text-5xl pb-2 md:pb-4 font-light text-whiteShade text-center">
           Anmälan är stängd
         </h1>
       </div>
 
-      <div className="bg-black px-8 md:px-16 lg:px-24 xl:px-48 py-20 lg:py-24 w-full hidden ">
+      <div className="bg-black px-8 md:px-16 lg:px-24 xl:px-48 py-20 lg:py-24 w-full ">
         <h1 className="text-2xl md:text-3xl lg:text-4xl xl:text-5xl pb-2 md:pb-4 font-light text-whiteShade">
           Anmälan
         </h1>
