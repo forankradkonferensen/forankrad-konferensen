@@ -7,13 +7,14 @@ import { getGeneralInformation} from './google-sheets-api/getContent'
 import Speakers from './components/Speakers';
 import Faqs from './components/Faqs';
 import Schedule from './components/Schedule';
+import ThemeSection from './components/ThemeSection';
 
 
-const twelveHours = 3600 * 12;
-export const revalidate = twelveHours;
+const oneHour = 3600;
+export const revalidate = oneHour;
 
 export default async function Home() {
-  const { datum, årtal, klockslag, bibelord, bibelRef, pris, plats, adress } = await getGeneralInformation()
+  const { datum, årtal, klockslag, bibelord, bibelRef, pris, plats, adress, tema } = await getGeneralInformation()
   return (
     <div>
       <Navbar />
@@ -54,7 +55,16 @@ export default async function Home() {
         </div>
       </div>
 
-      <div className='bg-black px-6 md:px-12 lg:px-24 xl:px-48 w-full'> {/* Talare för eventet */}
+      <div className='bg-brown px-6 py-12 md:px-12 lg:px-24 xl:px-48 lg:py-24 w-full'> {/* Tema för eventet */}
+        <h1 className='text-2xl lg:text-3xl text-center pb-4 lg:pb-8 font-medium'>Tema</h1>
+        <div className='flex flex-col md:flex-row'>
+          <Suspense fallback='hämtar Tema för eventet...'>
+            <ThemeSection content={tema}/>
+          </Suspense>
+        </div>
+      </div>
+
+      <div className='bg-black px-6 py-12 md:px-12 lg:px-24 xl:px-48 w-full'> {/* Talare för eventet */}
         <h1 className='text-2xl lg:text-3xl text-center pb-4 lg:pb-8 font-medium'>Talare</h1>
         <div className='flex flex-col md:flex-row'>
           <Suspense fallback='hämtar talare...'>

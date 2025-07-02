@@ -10,6 +10,7 @@ type GeneralInformation = {
     pris: string;
     plats: string;
     adress: string;
+    tema: string;
 };
 
 // We just use one row in the sheet document so we can destruct the information from the arra directly
@@ -21,7 +22,7 @@ export async function getGeneralInformation(): Promise<GeneralInformation> {
         });
         const data: string[][] | undefined | null = res.data.values;
         if (data) {
-            const [datum, årtal, klockslag, bibelord, bibelRef, pris, plats, adress] = data[1];
+            const [datum, årtal, klockslag, bibelord, bibelRef, pris, plats, adress, tema] = data[1];
             return {
                 datum,
                 årtal,
@@ -30,7 +31,8 @@ export async function getGeneralInformation(): Promise<GeneralInformation> {
                 bibelRef,
                 pris,
                 plats,
-                adress
+                adress,
+                tema
             };
         } else {
             throw new Error('No data found in the spreadsheet.');
