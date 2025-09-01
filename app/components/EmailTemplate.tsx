@@ -9,7 +9,7 @@ export const EmailTemplate: React.FC<Readonly<EmailTemplateProps>> = () => (
     <p>Vi ser så fram emot att ses den 27e september</p>
     <br />
     <p>
-      Vänligen swisha <span className="font-bold">299kr</span> till{" "}
+      Vänligen swisha <span className="font-bold">359kr</span> till{" "}
       <span className="font-bold">123 588 11 07</span> eller med hjälp av
       QR-koden här nedan.
     </p>
