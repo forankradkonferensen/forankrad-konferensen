@@ -1,4 +1,4 @@
-import { getSpeakersAndTestimonials } from '../google-sheets-api/getContent'
+import { getSpeakersAndTestimonials } from '../integrations/google-sheets-integration/getContent'
 import SpeakerCard from './SpeakerCard';
 
 const Speakers = async () => {

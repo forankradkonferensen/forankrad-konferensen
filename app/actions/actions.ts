@@ -1,8 +1,7 @@
 'use server';
-import { bookEvent } from './google-sheets-api/eventBooking';
-import { EmailTemplate } from './components/EmailTemplate';
+import { bookEvent } from '../integrations/google-sheets-integration/eventBooking';
+import { EmailTemplate } from '../components/EmailTemplate';
 import { Resend } from 'resend';
-
 export const handleBooking = async (prevState: any, formData: FormData) => {
     const name = formData.get('firstName')?.toString() ?? '';
     const lastName = formData.get('lastName')?.toString() ?? '';

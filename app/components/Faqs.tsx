@@ -1,4 +1,4 @@
-import { getFaQ } from '../google-sheets-api/getContent'
+import { getFaQ } from '../integrations/google-sheets-integration/getContent'
 import Faq from './Faq';
 
 const Faqs = async () => {

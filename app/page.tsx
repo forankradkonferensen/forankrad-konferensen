@@ -3,7 +3,7 @@ import dynamic from 'next/dynamic'
 import Navbar from './components/Navbar'
 import Banner from './components/Banner';
 
-import { getGeneralInformation} from './google-sheets-api/getContent'
+import { getGeneralInformation} from './integrations/google-sheets-integration/getContent'
 import Speakers from './components/Speakers';
 import Faqs from './components/Faqs';
 import Schedule from './components/Schedule';
