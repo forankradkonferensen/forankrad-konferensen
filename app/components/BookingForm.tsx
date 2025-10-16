@@ -13,10 +13,11 @@ function SubmitButton() {
 }
 
 interface action {
-  bookEvent: (prevState: any, formData: FormData) => Promise<{ message: string; } | undefined>
+  bookEvent: (prevState: any, formData: FormData) => Promise<{ message: string }>
 }
+
 const BookingForm: React.FC<action> = ({ bookEvent }) => {
-  const [state, formAction] = useFormState(bookEvent, { message: "" })
+  const [state, formAction] = useFormState(bookEvent, {message: ""})
 
   return (
     <div className="flex">
@@ -35,10 +36,10 @@ const BookingForm: React.FC<action> = ({ bookEvent }) => {
         <input className="text-sm font-light bg-whiteShade text-black flex input input-bordered w-full max-w-xs" type="text" id="address" name="address" placeholder="Diamantgatan 1" required />
 
         <label className="text-sm font-light text-whiteShade flex p-1 pt-4" htmlFor="zipCode">Postnummer</label>
-        <input className="text-sm font-light bg-whiteShade text-black flex input input-bordered w-full max-w-xs" type="number" id="zipCode" name="zipCode" placeholder="12345" required />
+        <input className="text-sm font-light bg-whiteShade text-black flex input input-bordered w-full max-w-xs" type="number" id="postCode" name="postCode" placeholder="12345" required />
 
         <label className="text-sm font-light text-whiteShade flex p-1 pt-4" htmlFor="postCode">Postort</label>
-        <input className="text-sm font-light bg-whiteShade text-black flex input input-bordered w-full max-w-xs" type="text" id="postCode" name="postCode" placeholder="Göteborg" required />
+        <input className="text-sm font-light bg-whiteShade text-black flex input input-bordered w-full max-w-xs" type="text" id="city" name="city" placeholder="Göteborg" required />
 
         <label className="text-sm font-light text-whiteShade flex p-1 pt-4" htmlFor="email">Mejladress</label>
         <input className="text-sm font-light bg-whiteShade text-black flex input input-bordered w-full max-w-xs" type="email" id="email" name="email" placeholder="mejladress@domän.se" required />
@@ -50,7 +51,7 @@ const BookingForm: React.FC<action> = ({ bookEvent }) => {
         <input className="text-sm font-light bg-whiteShade text-black flex input input-bordered w-full max-w-xs" type="phone" id="phoneNumber" name="phoneNumber" placeholder="+46xxxxxxxxx" required />
 
         <label className="text-sm font-light text-whiteShade flex p-1 pt-4" htmlFor="denomination">Församling</label>
-        <input className="text-sm font-light bg-whiteShade text-black flex input input-bordered w-full max-w-xs" type="text" id="denomination" name="denomination" placeholder="Pingstkyrkan Västra Frölunda" />
+        <input className="text-sm font-light bg-whiteShade text-black flex input input-bordered w-full max-w-xs" type="text" id="church" name="church" placeholder="Pingstkyrkan Västra Frölunda" />
 
         <label className="text-sm font-light text-whiteShade flex p-1 pt-4" htmlFor="message">Meddelande / något speciellt vi behöver veta (ex. allergier):</label>
         <textarea className="text-sm font-light bg-whiteShade text-black flex textarea textarea-bordered w-full max-w-xs" id="message" name="message" placeholder="Jag tål inte nötter..." ></textarea>

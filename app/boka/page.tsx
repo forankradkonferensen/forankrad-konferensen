@@ -1,7 +1,8 @@
 import BookingForm from "../components/BookingForm";
 import Navbar from "../components/Navbar";
-import { handleBooking } from "../actions";
-import { getGeneralInformation } from "../google-sheets-api/getContent";
+import { handleBooking } from "../actions/actions";
+import { getGeneralInformation } from "../integrations/google-sheets-integration/getContent";
+import { bookingAction } from "@/app/actions/bookingAction";
 
 const twelveHours = 3600 * 12;
 export const revalidate = twelveHours;
@@ -11,13 +12,13 @@ const Boka = async () => {
   return (
     <div>
       <Navbar />
-      <div className="hidden bg-black px-8 md:px-16 lg:px-24 xl:px-48 py-20 lg:py-24 w-full">
+      <div className=" bg-black px-8 md:px-16 lg:px-24 xl:px-48 py-20 lg:py-24 w-full">
         <h1 className="text-2xl md:text-3xl lg:text-4xl xl:text-5xl pb-2 md:pb-4 font-light text-whiteShade text-center">
           Anmälan är stängd
         </h1>
       </div>
 
-      <div className="bg-black px-8 md:px-16 lg:px-24 xl:px-48 py-20 lg:py-24 w-full ">
+      <div className="bg-black px-8 md:px-16 lg:px-24 xl:px-48 py-20 lg:py-24 w-full">
         <h1 className="text-2xl md:text-3xl lg:text-4xl xl:text-5xl pb-2 md:pb-4 font-light text-whiteShade">
           Anmälan
         </h1>
@@ -34,7 +35,7 @@ const Boka = async () => {
           Anmälan är bindande. Du kommer att få ett bekräftelsemejl med
           betalningsinformation. Observera att mejlet kan hamna i skräpposten.
         </p>
-        <BookingForm bookEvent={handleBooking} />
+        <BookingForm bookEvent={bookingAction} />
       </div>
     </div>
   );

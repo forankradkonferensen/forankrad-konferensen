@@ -1,4 +1,4 @@
-import {getSchedule} from '../google-sheets-api/getContent'
+import {getSchedule} from '../integrations/google-sheets-integration/getContent'
 
 const Schedule = async () => {
     const schedule = await getSchedule()
