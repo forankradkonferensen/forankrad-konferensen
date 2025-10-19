@@ -1,4 +1,3 @@
-import { EmailTemplate } from "../components/EmailTemplate";
 import { IBookEvent } from "../interfaces/IBookEvent";
 import { IHandleBookingIntegration } from "../interfaces/IHandleBookingIntegration";
 import { ISendEmail } from "../interfaces/ISendEmail";
@@ -16,14 +15,16 @@ export class BookEvent implements IBookEvent {
         this.emailService = emailService;
     }
 
-    public async BookEvent(
-        booking: Booking
-    ) : Promise<ServiceResult> {
+    public async BookEvent( booking: Booking) : Promise<ServiceResult> {
         if(!this.AvaileblePlacesExist())
             return new ServiceResult(false, "Tyvärr finns det inga platser lediga just nu.")
 
         if(await this.BookingAlreadyExist(booking.personalNumber)) {
-            return new ServiceResult(false, "Du har redan påbörjat en bokning!")
+            const emailSentSuccessfully: boolean = await this.emailService.SendToOneReciever(booking.email, booking.firstName)
+            if(emailSentSuccessfully)
+                return new ServiceResult(false, "Du har redan påbörjat en bokning! Vi har skickat ett nytt email till dig")
+
+            return new ServiceResult(false, "Du har redan påbörjat en bokning! Vi försökte skicka ett nytt email till dig men det misslyckades, kontakta oss direkt eller försök igen")
         }
 
         const result = await this.handleBookingIntegrtation.CreateBooking(booking)
@@ -31,14 +32,11 @@ export class BookEvent implements IBookEvent {
         if(!result)
             new ServiceResult(false, "Bokningen misslyckades, försök igen om en stund eller kontakta oss.")
 
-        const reactEmailContent = EmailTemplate({ firstName: booking.firstName }) as React.ReactElement;
 
-        const emailSentSuccessfully: boolean = await this.emailService.Send(
-            'Förankrad Konferensen <noreply@forankradkonferensen.se>',
-            [booking.email],
-            'Slutför bokning',
-            reactEmailContent 
-            )
+        const emailSentSuccessfully: boolean = await this.emailService.SendToOneReciever(booking.email, booking.firstName)
+        
+        if(!emailSentSuccessfully)
+            return new ServiceResult(true, "Vi kunde inte skicka ett email till dig vänligen testa igen, eller kontakta oss")
 
         return new ServiceResult(true, "Bokingen slutfördes, Vänligen titta din email.")
     }

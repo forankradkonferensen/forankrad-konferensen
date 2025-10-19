@@ -7,7 +7,7 @@ import { ISendEmail } from "../interfaces/ISendEmail";
 import { ISendEmailIntegration } from "../interfaces/ISendEmailIntegration";
 import { Booking } from "../models/Booking";
 import { BookEvent } from "../services/BookEvent";
-import { SendEmail } from "../services/SendEmail";
+import { SendCompleteBookingEmail } from "../services/SendCompleteBookingEmail";
 
 export const bookingAction = async (prevState: any, formData: FormData) => {
     const firstname = formData.get('firstName')?.toString() ?? '';
@@ -40,7 +40,7 @@ export const bookingAction = async (prevState: any, formData: FormData) => {
     // If you want to exchange notion for another provider just create a new integration and change the instance
     const handlebookingIntegration: IHandleBookingIntegration = new NotionHandleBooking();
     const sendEmailIntegration: ISendEmailIntegration = new ResendEmailIntegration();
-    const sendEmailService: ISendEmail = new SendEmail(sendEmailIntegration);
+    const sendEmailService: ISendEmail = new SendCompleteBookingEmail(sendEmailIntegration);
     const bookEvent: IBookEvent = new BookEvent(handlebookingIntegration, sendEmailService);
     const result = await bookEvent.BookEvent(booking);
 
