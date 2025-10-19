@@ -1,6 +1,5 @@
 import BookingForm from "../components/BookingForm";
 import Navbar from "../components/Navbar";
-import { handleBooking } from "../actions/actions";
 import { getGeneralInformation } from "../integrations/google-sheets-integration/getContent";
 import { bookingAction } from "@/app/actions/bookingAction";
 
